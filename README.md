@@ -1,4 +1,4 @@
-#### First Iteration: 
+### First Iteration: 
 Simple task, just have to determine what the proper formatting is for company without any instructions by comparing to the desired result. After a few iterations it did it perfectly every time even on different sentences. So this is a positive signal but this task is super super easy, like a 6 year old could do it easily, so I need to challenge it more. Also, if you look at the agent memory, its very redundant, need better context engineering.
 <img width="910" height="585" alt="memory_curve" src="https://github.com/user-attachments/assets/8f2f3d44-1741-4016-bb5f-982b0d7769b7" />
 
@@ -11,13 +11,14 @@ Simple task, just have to determine what the proper formatting is for company wi
 - Output a JSON object with customer name in ALL CAPS, date in DDMMYYYY format, and amount converted to integer cents — never output null when the required data is present in the message.
 ```
 
-#### Second Iteration: 
+### Second Iteration: 
 **Switched to a harder task:** the agent is an _onboarding specialist_ (incorporating, banking, setting up new businesses). For each customer message it produces a structured plan: actions, open questions, risks. A **reviewer** compares the draft to a reference of what thorough coverage would look like and writes category-tagged lessons about what was missed. A separate **curator** agent then merges those lessons into a structured markdown playbook—creating a new section every time a new category emerges.
 
 **Note:** The reviewer would be based on some combination of user feedback, existing skill documents for common skills, etc. RN in this iteration its just made up.
 
 **Next steps:** Came out with good results but not really any evaluation metric, so make sure to include that next time. Also this is redundant with info that Claude already has, so a waste of context. Tackle that after eval metric.
 
+##### Output:
 ```
 Incorporation
 - For a solo founder, clarify upfront whether they want the LLC taxed as a disregarded entity (default) or elect S-corp or C-corp treatment, since tax classification significantly impacts filing complexity and liability structure.
@@ -43,8 +44,10 @@ Banking
 - Payment processor migration (e.g., Stripe account transition from personal to business) should be planned with a cutover window and backup processor readiness—account review or verification friction during migration can disrupt revenue collection and must be de-risked in advance.
 ```
 
-#### Third Iteration: including eval metric
-The warm (with context/memory) had good results, but don't have results for cold. Did a good job reducing the size of the playbook:
+### Third Iteration: including eval metric
+The warm (with context/memory) had good results, but don't have results for cold. Did a good job reducing the size of the playbook
+
+##### Output:
 ```
 ## Incorporation
 - When a founder forms an entity in one state but operates in another, always include foreign qualification in the home state as a required step, not an optional one.
@@ -63,7 +66,7 @@ The warm (with context/memory) had good results, but don't have results for cold
 - When a business has EU customers, always request revenue broken down by country rather than relying on aggregate EU figures, as per-country VAT thresholds and OSS eligibility assessments require country-level data to be accurate.
 ```
 
-#### Fourth iteration: properly including eval metric
+### Fourth iteration: properly including eval metric
 Uh oh, cold actually did better than warm...why?
 few ideas:
 - Sonnet 4.6 is enormously capable on this task domain on its own. maybe the instructions detract from the quality bc they are not all-inclusive.
@@ -73,7 +76,7 @@ few ideas:
 	- warm -> 15/12/10
 	- cold -> 20/14/12
 
-Output-
+##### Output:
 ```
 Customer message: I'm a software developer based in India. I want to start a US business for my consulting work, and I already have a few US clients who have been paying me directly via wire transfer over the past few months. I want to do this properly. Help me? ──────────────────────────────────────────────────────────────────────── RUN 1: COLD (no playbook — what the model knows on its own) ──────────────────────────────────────────────────────────────────────── { 
 "actions": [ "Determine the best US entity type for a non-resident founder \u2014 a Wyoming or Delaware Single-Member LLC is typically the most practical choice for a solo Indian software consultant due to low costs, pass-through taxation, no US tax residency requirement for ownership, and strong legal protections; present both options with fee comparison", "Collect all required information for entity formation: chosen state, desired LLC name (plus 2-3 alternates), registered agent details, principal business address (a US virtual office address is acceptable), and founder's personal details including passport copy and Indian address", "Engage a registered agent service in the chosen state (Wyoming ~$50/yr, Delaware ~$50\u2013100/yr) since the founder has no physical US presence \u2014 this is legally required", "File Articles of Organization with the chosen state's Secretary of State and obtain the stamped/approved formation documents (Certificate of Organization or Formation)", "Draft a Single-Member LLC Operating Agreement tailored for a non-resident single-member LLC \u2014 this is critical for banking and legitimacy", "Apply for a US Employer Identification Number (EIN) via IRS Form SS-4; since the founder is a non-resident individual without an SSN/ITIN, the application must be submitted by fax or mail (or phone for international applicants) directly to the IRS \u2014 clarify that an SSN is NOT required to obtain an EIN as a foreign owner", "Open a US business bank account \u2014 research banks and fintechs that support non-resident-owned LLCs (Mercury, Relay, Wise Business, or Brex are strong options as they do not require in-person visits); prepare to submit: EIN confirmation letter, Articles of Organization, Operating Agreement, passport, and proof of address", "Set up a US virtual office address (e.g., via Regus, iPostal1, or similar) if not already done \u2014 needed for state registration, banking, and professional appearance; avoid using a registered agent address for banking as some banks reject this", "Retroactively address the prior months of payments received directly as an individual: advise the founder to document these carefully for tax purposes and understand the distinction going forward \u2014 payments received before the LLC existed are personal income, not LLC income", "Instruct existing US clients to update their payment details to the new LLC name and US bank account once banking is established; provide a template notification letter", "Set up invoicing under the LLC name using a tool like Wave, FreshBooks, or QuickBooks \u2014 ensure invoices reference the LLC name, EIN, and new US bank details", "Advise on US tax obligations: a single-member LLC owned by a non-resident alien is a 'disregarded entity' for US tax purposes; the LLC itself files no separate US federal income tax return, BUT the foreign owner must file Form 1040-NR if effectively connected income exists, and clients paying the LLC over $600/year must issue a Form 1099-NEC unless a W-8BEN-E is provided", "Prepare and provide a W-8BEN-E template for the founder to send to each US client \u2014 this certifies foreign status, may reduce or eliminate US withholding tax under the India-US tax treaty, and prevents clients from withholding 30% of payments", "Advise on Indian tax obligations: all income earned through the US LLC will still be taxable in India as the founder is an Indian tax resident; income must be reported in Indian ITR filings; consult a CA in India familiar with foreign income and FEMA regulations", "Assess FEMA (Foreign Exchange Management Act) compliance: receiving money into a foreign LLC account and then remitting to India must comply with RBI/FEMA rules; advise consulting an Indian CA or CS familiar with cross-border structures to ensure the remittance pathway (LLC profits \u2192 founder's Indian bank account) is compliant", "Recommend the founder obtain a dedicated business phone number and US-facing email for professional correspondence with clients", "Set up a simple bookkeeping system from day one to track all LLC income and expenses separately from personal finances \u2014 this is critical for piercing-the-corporate-veil protection and tax compliance", "Advise on annual compliance requirements: (a) State annual report/franchise tax filing in chosen state, (b) FinCEN Beneficial Ownership Information (BOI) report \u2014 newly formed LLCs in 2024/2025 must file within 90 days of formation, (c) maintaining a registered agent, (d) renewing virtual office if used", "Flag the new FinCEN BOI reporting requirement under the Corporate Transparency Act \u2014 the founder as a non-US person must submit passport details as the beneficial owner; walk through this process", "Discuss whether the founder needs a US ITIN (Individual Taxpayer Identification Number) in addition to the LLC's EIN \u2014 this may be needed for filing 1040-NR or claiming treaty benefits; initiate Form W-7 process if required" ], 

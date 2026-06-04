@@ -262,3 +262,4 @@ Saved final playbook to Iter5-memory.md (per-episode snapshots in Iter5-memory_e
 - The current retrieval process is cutting valuable information. Maybe actually check bullet by bullet but use a more rudimentary model.
 - Different playbooks for different roles.
 - Having the playbooks auto added to skill libraries (automatic primitive synthesis)
+- Inspired by talk "How Lyft Builds Evals That Actually Matter in Production" (only somewhat applicable as they are obviously much more rigorously testing every single agent): pass fail criteria for judge so that they can tweak, and collect human labels and iterate on LLM judge until high agreement rate is reached

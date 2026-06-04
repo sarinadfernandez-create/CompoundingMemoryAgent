@@ -1,6 +1,7 @@
 #### First Iteration: 
 Simple task, just have to determine what the proper formatting is for company without any instructions by comparing to the desired result. After a few iterations it did it perfectly every time even on different sentences. So this is a positive signal but this task is super super easy, like a 6 year old could do it easily, so I need to challenge it more. Also, if you look at the agent memory, its very redundant, need better context engineering.
-![[memory_curve.png]]
+<img width="910" height="585" alt="memory_curve" src="https://github.com/user-attachments/assets/8f2f3d44-1741-4016-bb5f-982b0d7769b7" />
+
 ##### Agent memory (self-taught)
 ```
 - Always confirm the target system's field names, value formats (e.g., case, date order, units like cents vs. decimals), and schema before assuming standard conventions.

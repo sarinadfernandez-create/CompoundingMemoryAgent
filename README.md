@@ -101,7 +101,7 @@ What the warm plan still misses:
 ```
 
 
-#### Iteration 5: 
+### Iteration 5: 
 **+23 percentage points from cold to warm!** what did I change:
 - The agent serves a single fictional client across five different task types—invoice processing, customer onboarding, international contractor hire, advisor setup, customer dispute. It learns client-specific facts: Helix's banking rails, template versions, approval thresholds, vendor history, past incidents. The held-out test deliberately requires stitching facts from three different task types: 'pay a Brazilian advisor on recurring' needs the international payment rule from the contractor task, the advisor template from the advisor task, and the voice-verify-bank-changes rule from the invoice task. Cold can't synthesize that as those facts aren't anywhere except in this company's institutional knowledge. The warm playbook is the company's institutional knowledge, accumulated and reorganized into retrievable skills. That's the per-customer memory layer.
 - Context reduction

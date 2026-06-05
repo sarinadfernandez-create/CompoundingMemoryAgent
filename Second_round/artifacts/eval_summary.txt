@@ -1,0 +1,82 @@
+============================================================================================
+EVAL HARNESS SUMMARY — 3 seeds per (config, test)
+============================================================================================
+
+──── TEST: intl_advisor
+     International advisor recurring setup (cross-task synthesis: T1 + T3 + T4)
+
+  Config                 Recall        Actions      Questions          Risks
+  -------------- -------------- -------------- -------------- --------------
+  cold            59.0 ±  8.9%  57.1 ±  0.0%  44.4 ± 19.2%  77.8 ± 19.2%
+  warm_full       76.9 ± 20.4%  81.0 ± 16.5%  77.8 ± 19.2%  66.7 ± 33.3%
+  warm_routed     64.1 ± 11.8%  71.4 ± 14.3%  66.7 ±  0.0%  44.4 ± 19.2%
+
+  Per-category recall (mean across seeds):
+    Category                               cold      warm_full    warm_routed
+    Approvals & Routing                   50.0%          83.3%         100.0%
+    Banking & Payments                    66.7%         100.0%         100.0%
+    Compliance                           100.0%          41.7%          33.3%
+    Contract Templates                    16.7%         100.0%         100.0%
+    Equity & Cap Table                    16.7%          83.3%           0.0%
+
+  Cost & context:
+    Config             Cost/run      Latency    Ctx chars     Sections
+    cold                $0.0313       37.94s            0          0.0
+    warm_full           $0.0352       57.32s         4351          6.0
+    warm_routed         $0.0340       30.13s         3849          5.0
+
+──── TEST: customer_expansion
+     Beacon SAML SSO + ARR upgrade (cross-task: T2 + T5 — accumulated Beacon-specific facts)
+
+  Config                 Recall        Actions      Questions          Risks
+  -------------- -------------- -------------- -------------- --------------
+  cold            33.3 ± 13.9%  38.9 ±  9.6%  33.3 ± 33.3%  16.7 ± 28.9%
+  warm_full       60.6 ± 18.9%  66.7 ± 16.7%  55.6 ± 38.5%  50.0 ±  0.0%
+  warm_routed     63.6 ±  9.1%  66.7 ±  0.0%  55.6 ± 19.2%  66.7 ± 28.9%
+
+  Per-category recall (mean across seeds):
+    Category                               cold      warm_full    warm_routed
+    Approvals & Routing                   66.7%          66.7%         100.0%
+    Banking & Payments                     0.0%          66.7%           0.0%
+    Compliance                            33.3%          77.8%          77.8%
+    Contract Templates                    33.3%         100.0%         100.0%
+    Vendor & Customer History             22.2%          11.1%          22.2%
+
+  Cost & context:
+    Config             Cost/run      Latency    Ctx chars     Sections
+    cold                $0.0302       35.57s            0          0.0
+    warm_full           $0.0299       27.17s         4351          6.0
+    warm_routed         $0.0307       33.35s         3220          4.0
+
+──── TEST: intl_contractor_batch
+     Two more Indian engineers, 6 months each (cross-task: T1 + T3 — scaled contractor hire)
+
+  Config                 Recall        Actions      Questions          Risks
+  -------------- -------------- -------------- -------------- --------------
+  cold            40.0 ± 10.0%  22.2 ±  9.6%  83.3 ± 28.9%  50.0 ±  0.0%
+  warm_full       80.0 ±  0.0% 100.0 ±  0.0%  50.0 ±  0.0%  50.0 ±  0.0%
+  warm_routed     60.0 ±  0.0%  66.7 ±  0.0%  50.0 ±  0.0%  50.0 ±  0.0%
+
+  Per-category recall (mean across seeds):
+    Category                               cold      warm_full    warm_routed
+    Approvals & Routing                   77.8%         100.0%         100.0%
+    Banking & Payments                     0.0%         100.0%           0.0%
+    Compliance                            41.7%          50.0%          50.0%
+    Contract Templates                     0.0%         100.0%         100.0%
+    Equity & Cap Table                     0.0%         100.0%           0.0%
+
+  Cost & context:
+    Config             Cost/run      Latency    Ctx chars     Sections
+    cold                $0.0329       41.33s            0          0.0
+    warm_full           $0.0284       27.82s         4351          6.0
+    warm_routed         $0.0278       28.95s         2610          3.0
+
+============================================================================================
+HEADLINE: warm vs cold — overall recall delta (mean ± std)
+============================================================================================
+  Test                                   Cold        Warm Full      Warm Routed    Δ (routed-cold)
+  intl_advisor                   59.0 ±  8.9%     76.9 ± 20.4%     64.1 ± 11.8%            +5.1 pp
+  customer_expansion             33.3 ± 13.9%     60.6 ± 18.9%     63.6 ±  9.1%           +30.3 pp
+  intl_contractor_batch          40.0 ± 10.0%     80.0 ±  0.0%     60.0 ±  0.0%           +20.0 pp
+
+Wall-clock: 958.7s    Total cost: $0.8413    Runs: 27

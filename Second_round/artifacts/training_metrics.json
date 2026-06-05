@@ -1,0 +1,96 @@
+{
+  "model": "claude-sonnet-4-6",
+  "temperature": 0.7,
+  "n_episodes": 5,
+  "final_playbook_sections": 6,
+  "final_playbook_bullets": 20,
+  "final_playbook_chars": 4351,
+  "cumulative_usage": {
+    "input_tokens": 15751,
+    "output_tokens": 8973,
+    "latency_s": 176.876,
+    "cost_usd": 0.181848
+  },
+  "per_episode": [
+    {
+      "episode": 1,
+      "case_id": "T1",
+      "summary": "Vendor invoice \u2014 BioReagents asking for payment to a new bank account",
+      "lessons_added": 4,
+      "playbook_sections": 4,
+      "playbook_bullets": 4,
+      "playbook_chars": 796,
+      "usage": {
+        "input_tokens": 1952,
+        "output_tokens": 990,
+        "latency_s": 23.687,
+        "cost_usd": 0.020706000000000002
+      },
+      "wall_clock_s": 23.69
+    },
+    {
+      "episode": 2,
+      "case_id": "T2",
+      "summary": "New customer onboarding \u2014 Beacon Labs at $40K ARR",
+      "lessons_added": 4,
+      "playbook_sections": 5,
+      "playbook_bullets": 8,
+      "playbook_chars": 1636,
+      "usage": {
+        "input_tokens": 2515,
+        "output_tokens": 1414,
+        "latency_s": 29.598000000000003,
+        "cost_usd": 0.028755000000000003
+      },
+      "wall_clock_s": 29.6
+    },
+    {
+      "episode": 3,
+      "case_id": "T3",
+      "summary": "International contractor \u2014 Indian engineer, 3 months",
+      "lessons_added": 4,
+      "playbook_sections": 6,
+      "playbook_bullets": 12,
+      "playbook_chars": 2592,
+      "usage": {
+        "input_tokens": 3707,
+        "output_tokens": 2323,
+        "latency_s": 48.128,
+        "cost_usd": 0.045966
+      },
+      "wall_clock_s": 48.13
+    },
+    {
+      "episode": 4,
+      "case_id": "T4",
+      "summary": "Advisor setup \u2014 Dr. Anita Sharma, US-based, recurring",
+      "lessons_added": 4,
+      "playbook_sections": 6,
+      "playbook_bullets": 16,
+      "playbook_chars": 3536,
+      "usage": {
+        "input_tokens": 3505,
+        "output_tokens": 1997,
+        "latency_s": 36.349999999999994,
+        "cost_usd": 0.040470000000000006
+      },
+      "wall_clock_s": 36.35
+    },
+    {
+      "episode": 5,
+      "case_id": "T5",
+      "summary": "Customer dispute \u2014 Beacon claiming no agreement to auto-renewal",
+      "lessons_added": 4,
+      "playbook_sections": 6,
+      "playbook_bullets": 20,
+      "playbook_chars": 4351,
+      "usage": {
+        "input_tokens": 4072,
+        "output_tokens": 2249,
+        "latency_s": 39.113,
+        "cost_usd": 0.045951000000000006
+      },
+      "wall_clock_s": 39.12
+    }
+  ]
+}

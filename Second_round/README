@@ -1,0 +1,104 @@
+# Round 2
+
+Architecture change up front: split the single script into `memory_loop_demo.py` (training only) and `eval_harness.py` (evaluation only). Required `--iter` flag versions every run under `artifacts/{iter_name}/`, so iterations live side by side instead of overwriting. Each iteration has its own training metrics, playbook, and eval results — fully self-contained for comparison.
+
+Why bother: the Iter5 +23pp number came from one test, one seed, one config. Without separation and multiple seeds, can't tell signal from noise. Really important to have strong and specific evaluation so that future iterations can be genuine improvements and a concrete roadmap can be built
+
+## Comparison
+
+| Iter | Approach | Avg Δ vs cold | Avg ctx chars | Notes |
+|---|---|---|---|---|
+| v1 cold | none (baseline) | — | 0 | |
+| v1 warm_full | full playbook | +18 pp | 4351 | upper bound; high variance on intl_advisor |
+| v1 warm_routed | section routing | +18 pp | 3226 | actually *hurts* on 2/3 tests |
+| v2 warm_rag | bullet RAG top-10 | TBD | TBD | |
+
+## v1_baseline: just measured properly
+
+Same training and held-out logic as Iter5 but actually rigorous: 3 seeds × 3 held-out tasks × 3 configs. Per-category recall, cost tracking, mean ± std.
+
+Tests:
+- `intl_advisor` — Brazilian advisor recurring (T1+T3+T4 facts)
+- `customer_expansion` — Beacon SSO + ARR upgrade (T2+T5 facts)
+- `intl_contractor_batch` — two more Indian engineers (T1+T3 facts)
+
+### Numbers
+
+| Test | Cold | Warm Full | Warm Routed | Δ (routed–cold) |
+|---|---|---|---|---|
+| intl_advisor | 59 ± 9% | 77 ± 20% | 64 ± 12% | **+5 pp** |
+| customer_expansion | 33 ± 14% | 61 ± 19% | 64 ± 9% | +30 pp |
+| intl_contractor_batch | 40 ± 10% | 80 ± 0% | 60 ± 0% | +20 pp |
+
+Honest takeaway: the +23 from Iter5 doesn't hold under N=3 seeds — that test now shows +5pp ± noise. New honest headline is ~+18pp average across cross-task held-outs. Smaller than the original claim but real.
+
+### The actual finding: routing hurts
+
+The more interesting result wasn't the recall delta — it was that **section-level routing underperforms full playbook on 2/3 tests**:
+- intl_advisor: warm_routed (64%) < warm_full (77%) by 13pp
+- intl_contractor_batch: warm_routed (60%) < warm_full (80%) by 20pp
+
+Per-category recall shows exactly what's failing — the router drops Banking & Payments and Equity & Cap Table because the task message doesn't *say* "banking" or "equity":
+
+| Category (intl_contractor) | warm_full | warm_routed |
+|---|---|---|
+| Banking & Payments | 100% | **0%** |
+| Equity & Cap Table | 100% | **0%** |
+
+"Expand the engineering team" needs the Wise-not-Mercury rule but never mentions banking. Section-level routing can't bridge that semantic gap.
+
+### Next step
+Section is the wrong granularity. Try bullet-level RAG. If that doesn't work, just assume that at some higher level, like if you were doing a different task, you could RAG task specific playbooks and then you can save context, but maybe task by task, it doesn't make sense to leave anything out since everything is connected.
+
+## v2_bullet_rag
+
+### Output:
+| Test | Cold | Warm Full | Warm Routed | Warm RAG |
+|---|---|---|---|---|
+| intl_advisor | 56 ± 12% | **90 ± 9%** | 74 ± 4% | 85 ± 13% |
+| customer_expansion | 49 ± 11% | **73 ± 16%** | 49 ± 5% | 49 ± 5% |
+| intl_contractor_batch | 57 ± 6% | 80 ± 0% | 70 ± 10% | **83 ± 6%** |
+
+Avg Δ vs cold: warm_full +27pp, warm_rag +18pp, warm_routed +10pp.
+Avg context: warm_rag uses 45% of warm_full's chars at $0.031 vs $0.035 per run.
+
+### What this shows
+- Bullet RAG fixes the routing failures from v1 — Banking & Equity recovery on 
+  intl_contractor goes from 0% → 100% vs warm_routed.
+- But warm_full still wins 2/3 tests. Bullet RAG is **competitive at lower context**, 
+  not dominant.
+- On customer_expansion, every config flatlines on Banking & Payments at 0% — 
+  including warm_full. That's a content gap (playbook learned vendor banking, 
+  not customer billing), not a retrieval gap. No retrieval method can fix 
+  missing content.
+
+### Next step
+Sweep TOP_K. Investigate customer_expansion failure mode. Then v3 cascade.
+
+### Output:
+[TBD — run pending]
+
+### What I expect
+- Beats `warm_routed` because the bullets that section routing was missing (Banking & Equity facts implicit in non-banking/non-equity tasks) get pulled by semantic similarity instead of section name match
+- Approaches or matches `warm_full` while using less context (top-10 of ~20 bullets ≈ half the playbook)
+- If it doesn't beat `warm_full`, retrieval is throwing away useful context — sweep K = 5, 10, 15
+
+If routing was the bottleneck the v1 data suggested, this fixes it. If not, the diagnostic was wrong and the variance/noise was bigger than the routing failure.
+
+The one concern is that maybe it never leaves any context behind and has no discernable effect. But that in itself is a signal because it means that selective RAG within one tasks playbook isn't actually the right thing to do in future runs.
+
+## Continuations
+**v3 cascade** — curator on Haiku, working agent on Sonnet, reviewer/grader on Opus. Cost story: how much can we save without quality drop. Easy to add (each role function takes a `model` param, just thread it through). Plus would save me some money theoretically lol
+
+**v4 sleep-time curator** — curator runs on a queue off the live thread. Working agent doesn't pay curator latency. Pairs well with cascade since curator can take more time once it's not blocking.
+
+**v5 hot/cold tier** — curator maintains a small `## Core` section (3-7 cross-cutting facts always injected) + topic sections retrieved via RAG. MemGPT-style. Useful if RAG misses cross-cutting essentials like people/approval rules that everything needs.
+
+**v6 intake** — cold-start problem. Connect Slack, extract people/projects/decisions/tools, seed memory store. Solves the worst UX moment in per-customer memory products: the first 10 tasks where the agent doesn't know the company yet. Plus I've done this before. Issue is I would need some slack data to start with.
+
+## Open questions
+- Right `TOP_K` for v2 — sweep needed.
+- v1 variance was high (one test ± 20pp). Grader inconsistency or real plan variation? Check seed-level plans in `raw_results`.
+- Once RAG is the retrieval primitive, do `##` sections still serve a purpose, or do they become humans-only formatting?
+- Pass/fail criteria for the judge — iterate grader prompt against human labels until agreement rate is high (per the Lyft eval talk). Only issue is that I am kind of a biased party if I am the only person doing labels.
+- Cascade quality threshold — at what curator model does playbook quality start dropping enough to matter?

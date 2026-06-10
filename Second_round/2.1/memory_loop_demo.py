@@ -267,30 +267,41 @@ ROUTER_SYSTEM = (
 # =============================================================================
 # LOW-LEVEL HELPERS  (exported)
 # =============================================================================
-def call(system, user, max_tokens=4096, temperature=DEFAULT_TEMPERATURE):
-    """Make an Anthropic API call; return (text, usage_dict).
+import random  # add this import at the top
 
-    usage_dict has keys:
-      input_tokens, output_tokens, latency_s, cost_usd
-    """
-    t0 = time.time()
-    r = client.messages.create(
-        model=MODEL,
-        max_tokens=max_tokens,
-        temperature=temperature,
-        system=system,
-        messages=[{"role": "user", "content": user}],
-    )
-    latency = time.time() - t0
-    in_tok = r.usage.input_tokens
-    out_tok = r.usage.output_tokens
-    cost = (in_tok / 1e6) * PRICE_INPUT_PER_M + (out_tok / 1e6) * PRICE_OUTPUT_PER_M
-    return r.content[0].text, {
-        "input_tokens": in_tok,
-        "output_tokens": out_tok,
-        "latency_s": round(latency, 3),
-        "cost_usd": round(cost, 6),
-    }
+def call(system, user, max_tokens=4096, temperature=DEFAULT_TEMPERATURE, max_retries=6):
+    """Make an Anthropic API call with exponential backoff on transient errors. ran into one during my first run"""
+    delay = 2.0
+    for attempt in range(max_retries):
+        try:
+            t0 = time.time()
+            r = client.messages.create(
+                model=MODEL, max_tokens=max_tokens, temperature=temperature,
+                system=system, messages=[{"role": "user", "content": user}],
+            )
+            latency = time.time() - t0
+            in_tok = r.usage.input_tokens
+            out_tok = r.usage.output_tokens
+            cost = (in_tok / 1e6) * PRICE_INPUT_PER_M + (out_tok / 1e6) * PRICE_OUTPUT_PER_M
+            return r.content[0].text, {
+                "input_tokens": in_tok,
+                "output_tokens": out_tok,
+                "latency_s": round(latency, 3),
+                "cost_usd": round(cost, 6),
+            }
+        except (anthropic.OverloadedError,
+                anthropic.RateLimitError,
+                anthropic.APIConnectionError,
+                anthropic.APITimeoutError,
+                anthropic.InternalServerError) as e:
+            if attempt == max_retries - 1:
+                print(f"  ✗ API error after {max_retries} retries: {type(e).__name__}")
+                raise
+            wait = min(delay * (2 ** attempt) + random.uniform(0, 1), 60.0)
+            print(f"  ⚠ {type(e).__name__} — backing off {wait:.1f}s "
+                  f"(retry {attempt + 1}/{max_retries})")
+            time.sleep(wait)
+    raise RuntimeError("unreachable")
 
 
 def strip_fences(text):

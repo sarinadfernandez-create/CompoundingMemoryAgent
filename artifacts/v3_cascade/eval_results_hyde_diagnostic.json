@@ -1,0 +1,2213 @@
+{
+  "iter": "v3_cascade",
+  "config": {
+    "models": {
+      "grader": "claude-sonnet-4-6",
+      "router": "claude-haiku-4-5",
+      "hyde": "claude-haiku-4-5"
+    },
+    "temperature_planner": 0.7,
+    "temperature_grader": 0.0,
+    "n_seeds": 3,
+    "configs": [
+      "warm_rag",
+      "warm_rag_hyde"
+    ],
+    "test_cases": [
+      "intl_advisor",
+      "customer_expansion",
+      "intl_contractor_batch"
+    ],
+    "top_k_rag": 10,
+    "embed_model": "text-embedding-3-small"
+  },
+  "playbook_stats": {
+    "sections": 6,
+    "bullets": 20,
+    "chars": 4219
+  },
+  "raw_results": {
+    "intl_advisor": {
+      "warm_rag": [
+        {
+          "overall_recall": 0.6923076923076923,
+          "recall_actions": 0.7142857142857143,
+          "recall_questions": 0.6666666666666666,
+          "recall_risks": 0.6666666666666666,
+          "recall_by_category": {
+            "Contract Templates": 0.5,
+            "Banking & Payments": 1.0,
+            "Compliance": 0.25,
+            "Equity & Cap Table": 1.0,
+            "Approvals & Routing": 1.0
+          },
+          "n_covered": 9,
+          "n_missing": 4,
+          "n_total_items": 13,
+          "tokens_in": 2743,
+          "tokens_out": 1651,
+          "cost_usd": 0.032995000000000003,
+          "latency_s": 30.456,
+          "playbook_chars_in_context": 2397,
+          "sections_in_context": 6,
+          "router_sections_chosen": [
+            "Contract Templates",
+            "Approvals & Routing",
+            "Vendor & Customer History",
+            "Equity & Cap Table",
+            "Compliance",
+            "Banking & Payments"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 1.0,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": null,
+          "hyde_hypothetical_preview": null,
+          "seed": 0,
+          "plan": {
+            "actions": [
+              "Prepare the SAB advisor agreement using template v1.4 (not IC v2.1, MSA v3.2, or any generic template) \u2014 v1.4 contains the mandatory IP assignment language added by Marcus after the 2024 patent dispute",
+              "Include the standard equity grant of 0.05% vesting over the 12-month engagement term per Helix default, unless Marcus explicitly instructs otherwise",
+              "Determine whether Dr. Costa will access confidential Helix research \u2014 if yes, attach the IP/confidentiality addendum (which replaces the default v1.4 confidentiality section, not supplements it)",
+              "Surface and document whether Dr. Costa holds any conflicting positions at other biotechs that require non-compete disclosure before finalizing the agreement",
+              "Route the completed advisor agreement to Marcus for review and approval before signing, as total engagement value is $36,000 (12 \u00d7 $3,000), which exceeds the $5,000 spend threshold",
+              "Do NOT route Dr. Costa through Priya's technical vetting process \u2014 that step applies to engineer/contractor engagements, not SAB advisors; confirm with Marcus if any technical vetting is nonetheless desired",
+              "Once agreement is signed, set up payment via Wise (not Mercury \u2014 Mercury was replaced for international transfers in Q2 2024); do not use Mercury for this cross-border payment",
+              "Verify Dr. Costa's new bank account details through a secondary confirmation channel (e.g., a direct callback or video verification) before entering them into Wise \u2014 never action bank detail changes based solely on an inbound message, as this is a common fraud vector",
+              "Flag Dr. Costa for 1099-NEC issuance at year-end if total annual payments reach $600+ \u2014 note that while he is Brazil-based, confirm tax residency and whether US tax reporting obligations apply; if he is a non-US person, obtain a completed W-8BEN (individual) form instead and retain on file",
+              "Conduct an independent-contractor status review per the 2023 misclassification precedent to confirm Dr. Costa qualifies as a true IC before classifying him accordingly",
+              "Log the engagement, contract version used, equity grant, and payment routing in the relevant Helix systems (NetSuite or equivalent) for audit trail"
+            ],
+            "questions": [
+              "Will Dr. Costa be accessing confidential Helix research? This determines whether the IP/confidentiality addendum must be attached to the v1.4 agreement",
+              "Does Dr. Costa currently hold any positions at other biotech companies that could constitute a conflict of interest requiring non-compete disclosure?",
+              "Is Marcus approving the standard 0.05% equity grant, or does he wish to override the default for this engagement?",
+              "How were Dr. Costa's new bank account details received \u2014 via email, WhatsApp, or another channel? Has anyone verbally or visually confirmed these details directly with Dr. Costa to rule out fraud or account-takeover?",
+              "What is Dr. Costa's tax residency status for US reporting purposes? Is he a non-US person requiring a W-8BEN, or are there any US-source income considerations that trigger 1099-NEC obligations?",
+              "Has Marcus been briefed on the total $36,000 commitment and is he ready to provide formal spend approval?"
+            ],
+            "risks": [
+              "FRAUD RISK (HIGH): Unsolicited or recently received bank account detail changes are a primary vector for payment fraud and business email compromise \u2014 do not load new banking details into Wise until independently verified directly with Dr. Costa through a trusted, out-of-band channel",
+              "WRONG TEMPLATE RISK: Using IC v2.1 (international) instead of v1.4 for an SAB advisor would omit the critical post-2024-patent-dispute IP assignment language \u2014 must use v1.4 for all SAB engagements regardless of advisor's geography",
+              "SPEND APPROVAL RISK: Total engagement is $36,000, well above the $5,000 threshold \u2014 processing any payment without prior Marcus approval violates Helix policy",
+              "COMPLIANCE RISK: Skipping the IC misclassification review (required by 2023 precedent) before classifying Dr. Costa as an independent contractor could expose Helix to employment tax liability",
+              "EQUITY RISK: Omitting the 0.05% equity grant from the agreement without explicit Marcus override would create a discrepancy between Helix's standard SAB terms and the executed contract, complicating cap table management",
+              "CONFLICT-OF-INTEREST RISK: Failing to surface potential non-compete or competing-affiliation disclosures before signing could expose Helix to IP ownership disputes or contractual breaches similar to the 2024 patent dispute that prompted the v1.4 update"
+            ]
+          },
+          "judgment": {
+            "n_covered": 9,
+            "n_missing": 4,
+            "missing": [
+              "Use Helix's advisor agreement template v1.4 (from T4) with the international provisions from the IC template v2.1 \u2014 W-8BEN-E and 30-day notice \u2014 added as an addendum",
+              "Collect W-8BEN-E from Dr. Costa before the first payment (from T3)",
+              "Does Brazil's tax/labor regime affect 1099 vs W-2 classification logic? (extrapolated from T3 + T4 caution)",
+              "Brazil's tax law may treat recurring advisor payments differently from US \u2014 Helix doesn't manage but should flag"
+            ]
+          }
+        },
+        {
+          "overall_recall": 0.7692307692307693,
+          "recall_actions": 0.8571428571428571,
+          "recall_questions": 0.6666666666666666,
+          "recall_risks": 0.6666666666666666,
+          "recall_by_category": {
+            "Contract Templates": 1.0,
+            "Banking & Payments": 1.0,
+            "Compliance": 0.25,
+            "Equity & Cap Table": 1.0,
+            "Approvals & Routing": 1.0
+          },
+          "n_covered": 10,
+          "n_missing": 3,
+          "n_total_items": 13,
+          "tokens_in": 2706,
+          "tokens_out": 1613,
+          "cost_usd": 0.032314,
+          "latency_s": 36.563,
+          "playbook_chars_in_context": 2397,
+          "sections_in_context": 6,
+          "router_sections_chosen": [
+            "Contract Templates",
+            "Approvals & Routing",
+            "Vendor & Customer History",
+            "Equity & Cap Table",
+            "Compliance",
+            "Banking & Payments"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 1.0,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": null,
+          "hyde_hypothetical_preview": null,
+          "seed": 1,
+          "plan": {
+            "actions": [
+              "Use SAB advisor agreement template v1.4 (not IC v2.1, MSA v3.2, or any generic template) as the base contract for Dr. Costa's engagement, since he is a scientific advisor board member \u2014 his Brazil location does not change the template selection for SAB roles.",
+              "Before circulating the contract, confirm with Dr. Costa whether he will access confidential Helix research; if yes, attach the IP/confidentiality addendum in place of the default v1.4 IP language per playbook policy.",
+              "Surface and document conflict-of-interest/non-compete disclosure: ask Dr. Costa whether he holds any conflicting positions at other biotechs, and record his response before finalizing the agreement.",
+              "Reflect the standard SAB equity grant of 0.05% vesting over the 12-month engagement term in the advisor agreement, unless Marcus explicitly overrides this default.",
+              "Route the advisor agreement to Marcus for review and approval before signing \u2014 total engagement value is $36,000 (12 \u00d7 $3,000), which exceeds the $5,000 spend threshold requiring CEO approval.",
+              "Complete Priya's internal technical vetting of Dr. Costa's background before the contract is signed \u2014 this step is mandatory and must precede execution.",
+              "Once the agreement is signed, set up payment via Wise (not Mercury) for all monthly $3,000 cross-border transfers to Brazil, consistent with Helix's Q2 2024 policy replacing Mercury for international payments.",
+              "Do NOT process the new bank account details Dr. Costa submitted until they have been independently verified through a secondary channel (e.g., a direct call or video confirmation with Dr. Costa using a known contact number) \u2014 unsolicited bank detail changes are a high fraud-risk vector and must never be accepted at face value.",
+              "Flag Dr. Costa for 1099-NEC issuance at year-end if his annual payments reach or exceed $600 (they will, at $36,000 total); additionally, conduct the required independent-contractor vs. W-2 misclassification review per the 2023 precedent before finalizing his classification."
+            ],
+            "questions": [
+              "Will Dr. Costa access confidential Helix research? This determines whether the IP/confidentiality addendum must replace the default v1.4 IP language.",
+              "Does Dr. Costa hold any conflicting advisory or employment positions at other biotechs that require non-compete disclosure?",
+              "Is Marcus approving the standard 0.05% equity grant, or does he wish to override the default for this engagement?",
+              "Has Priya been scheduled to complete her technical vetting of Dr. Costa's background prior to the contract signing date?",
+              "Can we independently verify Dr. Costa's new bank account details via a direct, out-of-band confirmation (phone/video call) before entering them into Wise? Who submitted the bank details and through what channel?",
+              "Has the independent-contractor classification review been completed to confirm Dr. Costa should be classified as 1099 rather than W-2, per the 2023 misclassification precedent?"
+            ],
+            "risks": [
+              "HIGH \u2014 Fraud/social engineering risk: Bank account details arriving unsolicited or via email/message are a common business email compromise vector. Do not load these details into Wise until verified through a separate, trusted communication channel directly with Dr. Costa.",
+              "HIGH \u2014 Contract template misapplication: Using IC v2.1 (international) instead of SAB v1.4 would omit the critical IP assignment language Marcus added after the 2024 patent dispute. Must use v1.4 for all SAB engagements regardless of geography.",
+              "HIGH \u2014 Spend approval bypass: At $36,000 total, this engagement far exceeds the $5,000 threshold. Processing any payment without prior Marcus approval violates Helix policy.",
+              "MEDIUM \u2014 Missing IP/confidentiality addendum: If Dr. Costa will access confidential research and the addendum is not attached, Helix's IP protections may be inadequate.",
+              "MEDIUM \u2014 Technical vetting skipped: Proceeding to contract signing without Priya's background review violates internal policy and could expose Helix to an unvetted advisor relationship.",
+              "MEDIUM \u2014 Misclassification risk: Without completing the 1099 vs. W-2 review per the 2023 precedent, Helix could face tax/labor compliance liability.",
+              "LOW \u2014 Conflict-of-interest undisclosed: Failure to surface non-compete or competing-position disclosures before signing could create IP ownership disputes or contractual conflicts with Dr. Costa's other engagements."
+            ]
+          },
+          "judgment": {
+            "n_covered": 10,
+            "n_missing": 3,
+            "missing": [
+              "Collect W-8BEN-E from Dr. Costa before the first payment (from T3)",
+              "Does Brazil's tax/labor regime affect 1099 vs W-2 classification logic? (extrapolated from T3 + T4 caution)",
+              "Brazil's tax law may treat recurring advisor payments differently from US \u2014 Helix doesn't manage but should flag"
+            ]
+          }
+        },
+        {
+          "overall_recall": 0.8461538461538461,
+          "recall_actions": 0.8571428571428571,
+          "recall_questions": 0.6666666666666666,
+          "recall_risks": 1.0,
+          "recall_by_category": {
+            "Contract Templates": 1.0,
+            "Banking & Payments": 1.0,
+            "Compliance": 0.75,
+            "Equity & Cap Table": 1.0,
+            "Approvals & Routing": 0.5
+          },
+          "n_covered": 11,
+          "n_missing": 2,
+          "n_total_items": 13,
+          "tokens_in": 2748,
+          "tokens_out": 1665,
+          "cost_usd": 0.03322,
+          "latency_s": 30.598999999999997,
+          "playbook_chars_in_context": 2397,
+          "sections_in_context": 6,
+          "router_sections_chosen": [
+            "Contract Templates",
+            "Approvals & Routing",
+            "Vendor & Customer History",
+            "Equity & Cap Table",
+            "Compliance",
+            "Banking & Payments"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 1.0,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": null,
+          "hyde_hypothetical_preview": null,
+          "seed": 2,
+          "plan": {
+            "actions": [
+              "Use SAB advisor agreement template v1.4 (not IC v2.1, MSA v3.2, or any generic template) \u2014 Dr. Costa is a scientific advisor, so v1.4 is correct regardless of his international location; include the standard 0.05% equity grant vesting over the 12-month engagement term per Helix default unless Marcus explicitly overrides",
+              "Determine whether Dr. Costa will access confidential Helix research \u2014 if yes, attach the IP/confidentiality addendum to v1.4 (which replaces the default IP language in the base template); if no, proceed with v1.4 as-is",
+              "Surface and document conflict-of-interest check: confirm whether Dr. Costa holds any positions at other biotechs that require non-compete disclosure before finalizing the agreement",
+              "Route the completed advisor agreement to Marcus for review and sign-off \u2014 total engagement value is $36,000 ($3,000 x 12 months), which exceeds the $5,000 spend threshold requiring CEO approval before any payment is processed",
+              "Do NOT route for Priya's technical vetting \u2014 that step applies to contractor engineer engagements, not SAB advisors; skip that step here",
+              "Flag Dr. Costa for 1099-NEC issuance consideration: note that he is Brazil-based and therefore likely requires a W-8BEN rather than a 1099-NEC (1099-NEC applies to US persons paid $600+); confirm tax residency and withholding obligations with Helix's accountant or legal counsel before year-end classification",
+              "Perform independent-contractor vs. W-2 classification review per the 2023 misclassification precedent before finalizing tax treatment, even though Dr. Costa is international",
+              "Route all monthly payments ($3,000/month) through Wise, not Mercury \u2014 Helix's standard for international/cross-border payments since Q2 2024",
+              "Do NOT process the new bank account details Dr. Costa provided until identity and account ownership are independently verified through a secondary channel (e.g., a direct phone/video call with Dr. Costa using a known contact number, not contact info supplied in the same message as the bank details) \u2014 this is a high-risk fraud vector (business email compromise / account-change scam)"
+            ],
+            "questions": [
+              "Will Dr. Costa have access to confidential Helix research? (Determines whether IP/confidentiality addendum must be attached to v1.4)",
+              "Does Dr. Costa hold any advisory, employment, or board positions at other biotech companies that would require non-compete disclosure?",
+              "Is Marcus approving the standard 0.05% equity grant, or does he wish to override the default for this engagement?",
+              "Has Dr. Costa's new bank account change been verified directly with him via a trusted, out-of-band communication channel (not email or the same message thread that delivered the account details)?",
+              "What is Dr. Costa's tax classification under Brazilian and US tax law \u2014 does he need to complete a W-8BEN, and are there any Brazilian withholding or tax treaty considerations Helix's accountant needs to address?",
+              "Who internally submitted the request and through what channel did Dr. Costa's bank account details arrive \u2014 was it a verified, authenticated communication?"
+            ],
+            "risks": [
+              "FRAUD RISK (HIGH): Unsolicited or newly submitted bank account details are a classic business email compromise (BEC) indicator \u2014 if the account details were provided via email or an unverified channel, processing payment without out-of-band verification could result in funds being sent to a fraudulent account; this must be verified before any payment is set up",
+              "TEMPLATE RISK: Using IC v2.1 (international contractor template) instead of v1.4 would be incorrect for an SAB engagement and would omit the critical post-2024-patent-dispute IP assignment language Marcus added \u2014 must use v1.4",
+              "SPEND APPROVAL RISK: Total engagement is $36,000; processing any payment without prior Marcus approval violates Helix's >$5,000 spend policy",
+              "IP RISK: If Dr. Costa will access confidential research and the IP/confidentiality addendum is not attached, Helix's IP protections may be incomplete",
+              "COMPLIANCE RISK: Misclassification review is required per 2023 precedent; skipping it exposes Helix to potential tax/labor liability even for international advisors",
+              "TAX RISK: Incorrectly issuing a 1099-NEC to a Brazilian national instead of collecting a W-8BEN and applying correct withholding treatment could create IRS compliance issues",
+              "CONFLICT-OF-INTEREST RISK: Failure to surface competing biotech affiliations before signing could create IP ownership disputes or breach of fiduciary duty issues post-engagement"
+            ]
+          },
+          "judgment": {
+            "n_covered": 11,
+            "n_missing": 2,
+            "missing": [
+              "Collect W-8BEN-E from Dr. Costa before the first payment (from T3)",
+              "Has Priya reviewed his scientific background? Helix's standard for technical hires (from T3 pattern)"
+            ]
+          }
+        }
+      ],
+      "warm_rag_hyde": [
+        {
+          "overall_recall": 0.7692307692307693,
+          "recall_actions": 0.8571428571428571,
+          "recall_questions": 0.6666666666666666,
+          "recall_risks": 0.6666666666666666,
+          "recall_by_category": {
+            "Contract Templates": 1.0,
+            "Banking & Payments": 1.0,
+            "Compliance": 0.5,
+            "Equity & Cap Table": 1.0,
+            "Approvals & Routing": 0.5
+          },
+          "n_covered": 10,
+          "n_missing": 3,
+          "n_total_items": 13,
+          "tokens_in": 2799,
+          "tokens_out": 1945,
+          "cost_usd": 0.033103,
+          "latency_s": 34.382068845748904,
+          "playbook_chars_in_context": 2375,
+          "sections_in_context": 6,
+          "router_sections_chosen": [
+            "Vendor & Customer History",
+            "Contract Templates",
+            "Banking & Payments",
+            "Compliance",
+            "Approvals & Routing",
+            "Equity & Cap Table"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 1.0,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": "claude-haiku-4-5",
+          "hyde_hypothetical_preview": "# Scientific Advisor Onboarding \u2014 International Payments\n\n\u2022 **Verify advisor agreement & banking details.** Have Rafael sign the Scientific Advisor Agreement (v2.3, stored in Legal/Templates) confirming $3,000 USD monthly, 12-month term, and IP assignment clause. Cross-reference his bank details aga",
+          "seed": 0,
+          "plan": {
+            "actions": [
+              "Use SAB advisor agreement template v1.4 for Dr. Rafael Costa's engagement \u2014 do NOT use IC v2.1 (international contractor template) or MSA v3.2, as v1.4 is required for all SAB engagements regardless of geography",
+              "Before sending v1.4, determine whether Dr. Costa will access Helix confidential research \u2014 if yes, substitute the IP/confidentiality addendum in place of the default v1.4 IP language per playbook policy",
+              "Surface and document the two mandatory advisor onboarding disclosures: (1) whether Dr. Costa holds conflicting positions at other biotechs requiring non-compete disclosure, and (2) whether he will access confidential research (which triggers the addendum above)",
+              "Include the standard SAB equity grant of 0.05% vesting over the 12-month engagement term in the agreement unless Marcus explicitly overrides this",
+              "Total engagement value is $3,000 x 12 = $36,000, which exceeds the $5,000 threshold \u2014 obtain Marcus's approval before any payment is processed",
+              "Route all payments to Dr. Costa through Wise (not Mercury), as Helix policy requires all international/cross-border payments to go via Wise since Mercury was replaced for international transfers in Q2 2024",
+              "Do NOT process payment based solely on the bank details Dr. Costa just submitted \u2014 independently verify his new bank account details through a secondary trusted channel (e.g., a phone call or video call to a known contact number) before updating payment records, to guard against fraud or account-takeover",
+              "Assess 1099-NEC applicability: Dr. Costa is Brazil-based, so standard US 1099-NEC rules likely do not apply, but flag for legal/finance review to confirm whether any US tax reporting obligations exist given the cross-border nature and SAB classification",
+              "Confirm true independent-contractor status per the 2023 misclassification precedent before finalizing classification \u2014 document the IC vs. W-2 review even for international advisors",
+              "Do not route this engagement through the Mercury business account ACH system \u2014 that is reserved for US domestic vendor payments only; Wise is the correct rail here"
+            ],
+            "questions": [
+              "Will Dr. Costa access Helix confidential research? (Determines whether IP/confidentiality addendum replaces default v1.4 IP language)",
+              "Does Dr. Costa hold any conflicting positions at other biotechs that require non-compete disclosure?",
+              "Has Marcus reviewed and approved the $36,000 total engagement spend before we proceed to contract signing and payment?",
+              "How were Dr. Costa's new bank account details submitted \u2014 and has anyone independently verified them through a trusted secondary channel before we update payment records?",
+              "Is there any Marcus-directed override on the standard 0.05% equity grant for this engagement?",
+              "Has legal/finance confirmed the applicable tax reporting obligations (if any) for a Brazil-based SAB member paid by a US entity?"
+            ],
+            "risks": [
+              "Fraud risk: Dr. Costa's bank account details were just sent over \u2014 acting on unverified new banking information without secondary confirmation is a significant fraud/social-engineering vector; do not update Wise payment details until independently verified",
+              "Template misuse risk: There may be a temptation to use IC v2.1 (international contractor template) because Dr. Costa is international, but SAB engagements must use v1.4 regardless \u2014 using the wrong template omits Marcus's post-2024-patent-dispute IP assignment language",
+              "Approval bypass risk: Total spend of $36,000 requires Marcus's explicit approval before payment; processing any invoice without that approval violates Helix policy",
+              "IP exposure risk: If Dr. Costa will access confidential research and the IP/confidentiality addendum is not substituted in, Helix's IP protections under the engagement will be inadequate",
+              "Misclassification risk: The 2023 precedent requires an IC vs. W-2 review before finalizing classification; skipping this step creates legal/compliance exposure even for international advisors",
+              "Non-compete/conflict-of-interest risk: Failure to surface competing biotech affiliations at onboarding could create undisclosed conflicts affecting Helix's research integrity or IP ownership"
+            ]
+          },
+          "judgment": {
+            "n_covered": 10,
+            "n_missing": 3,
+            "missing": [
+              "Collect W-8BEN-E from Dr. Costa before the first payment (from T3)",
+              "Has Priya reviewed his scientific background? Helix's standard for technical hires (from T3 pattern)",
+              "Brazil's tax law may treat recurring advisor payments differently from US \u2014 Helix doesn't manage but should flag"
+            ]
+          }
+        },
+        {
+          "overall_recall": 0.8461538461538461,
+          "recall_actions": 0.8571428571428571,
+          "recall_questions": 0.6666666666666666,
+          "recall_risks": 1.0,
+          "recall_by_category": {
+            "Contract Templates": 1.0,
+            "Banking & Payments": 1.0,
+            "Compliance": 0.75,
+            "Equity & Cap Table": 1.0,
+            "Approvals & Routing": 0.5
+          },
+          "n_covered": 11,
+          "n_missing": 2,
+          "n_total_items": 13,
+          "tokens_in": 3006,
+          "tokens_out": 2074,
+          "cost_usd": 0.036058,
+          "latency_s": 38.18579203605652,
+          "playbook_chars_in_context": 2388,
+          "sections_in_context": 6,
+          "router_sections_chosen": [
+            "Vendor & Customer History",
+            "Compliance",
+            "Banking & Payments",
+            "Contract Templates",
+            "Approvals & Routing",
+            "Equity & Cap Table"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 1.0,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": "claude-haiku-4-5",
+          "hyde_hypothetical_preview": "# International Advisor Onboarding \u2014 Brazil\n\n- **Verify identity and banking details before payment setup.** Have Dr. Costa complete the Advisor Agreement (v2.3) and provide a copy of his national ID and tax registration number (CPF). Cross-reference his bank details against his government ID. Do no",
+          "seed": 1,
+          "plan": {
+            "actions": [
+              "Use SAB advisor agreement template v1.4 (not IC v2.1, MSA v3.2, or any generic template) as the base contract for Dr. Rafael Costa's engagement, since this is a scientific advisor board engagement \u2014 v1.4 contains the mandatory IP assignment language added by Marcus after the 2024 patent dispute",
+              "Before finalizing the template choice, determine whether Dr. Rafael Costa will access Helix confidential research \u2014 if yes, replace the default v1.4 template body with the IP/confidentiality addendum version of v1.4, per playbook policy",
+              "Surface and document in onboarding whether Dr. Costa holds any conflicting positions at other biotechs that would require non-compete disclosure, as required for all advisor onboardings",
+              "Include the standard SAB equity grant of 0.05% vesting over the 12-month engagement term in the agreement, unless Marcus explicitly overrides this default",
+              "Route the completed advisor agreement to Marcus for review and sign-off prior to execution, since total engagement value is $36,000 (12 \u00d7 $3,000), which exceeds the $5,000 spend threshold requiring CEO approval before payment is processed",
+              "Set up all payments to Dr. Costa via Wise (not Mercury), as Helix routes all international contractor payments through Wise since Q2 2024",
+              "Do NOT process payment to the new bank account details Dr. Costa just sent until the account change has been independently verified directly with Dr. Costa through a trusted, previously established contact channel \u2014 unsolicited bank detail changes are a high-risk fraud vector; confirm via phone or prior email thread before updating payment records",
+              "Flag Dr. Costa for potential 1099-NEC issuance at year-end if cumulative annual payments reach or exceed $600 USD equivalent \u2014 note he is Brazil-based so assess whether US tax reporting obligations apply given payment sourcing; loop in finance/legal to confirm",
+              "Conduct an independent-contractor classification review per the 2023 misclassification precedent to confirm Dr. Costa qualifies as a true independent contractor before finalizing classification",
+              "Schedule the mandatory 14-day customer success check-in \u2014 clarify with the team whether this advisor onboarding triggers the CS check-in policy (designed for customers), and if so assign the correct CS owner based on ARR tier; if not applicable to advisors, document the exception"
+            ],
+            "questions": [
+              "Will Dr. Rafael Costa have access to Helix confidential research? This determines whether the standard v1.4 template is used as-is or whether the IP/confidentiality addendum replaces it",
+              "Does Dr. Costa currently hold positions at any other biotech companies that would require non-compete disclosure?",
+              "Has Marcus explicitly reviewed and approved the standard 0.05% equity grant, or does he wish to override it for this engagement?",
+              "How was Dr. Costa's new bank account information submitted \u2014 was it through a verified, trusted channel? Has anyone spoken directly with Dr. Costa to confirm the account change is legitimate before it is entered into Wise?",
+              "Does Helix's 1099-NEC obligation apply to Brazil-based advisors paid from US accounts, or does a W-8BEN or equivalent foreign tax form apply instead? Finance/legal should confirm",
+              "Is the 14-day CS check-in policy applicable to advisor onboardings, or is it strictly for customers? If applicable, who is the CS owner for this engagement?"
+            ],
+            "risks": [
+              "HIGH \u2014 Fraud risk: Dr. Costa just sent over new bank account details unsolicited. This is a classic business email compromise (BEC) / payment fraud pattern. Do not update payment records or send any funds until the account change is verified directly with Dr. Costa via a previously trusted communication channel (phone call or prior verified email)",
+              "HIGH \u2014 Wrong template risk: Using IC v2.1 (international version) instead of v1.4 for a SAB engagement would omit the critical IP assignment language Marcus added after the 2024 patent dispute \u2014 must use v1.4 as the base",
+              "MEDIUM \u2014 Missing IP/confidentiality addendum: If Dr. Costa will access confidential research and the addendum is not substituted in, Helix's IP protections may be inadequate",
+              "MEDIUM \u2014 CEO approval bottleneck: The $36,000 total engagement value requires Marcus's approval before any payment is processed; delays in obtaining this approval will block payment timelines",
+              "MEDIUM \u2014 Misclassification risk: Failure to complete the independent-contractor classification review before signing exposes Helix to the same misclassification liability flagged in the 2023 precedent",
+              "MEDIUM \u2014 International tax compliance: Unclear whether US 1099-NEC rules apply to a Brazil-based advisor; incorrect tax treatment could create compliance exposure \u2014 needs finance/legal confirmation",
+              "LOW \u2014 Equity omission: If the 0.05% equity grant is not explicitly included in the agreement and Marcus has not overridden it, the agreement will be incomplete per Helix's standard SAB terms"
+            ]
+          },
+          "judgment": {
+            "n_covered": 11,
+            "n_missing": 2,
+            "missing": [
+              "Collect W-8BEN-E from Dr. Costa before the first payment (from T3)",
+              "Has Priya reviewed his scientific background? Helix's standard for technical hires (from T3 pattern)"
+            ]
+          }
+        },
+        {
+          "overall_recall": 0.9230769230769231,
+          "recall_actions": 1.0,
+          "recall_questions": 0.6666666666666666,
+          "recall_risks": 1.0,
+          "recall_by_category": {
+            "Contract Templates": 1.0,
+            "Banking & Payments": 1.0,
+            "Compliance": 1.0,
+            "Equity & Cap Table": 1.0,
+            "Approvals & Routing": 0.5
+          },
+          "n_covered": 12,
+          "n_missing": 1,
+          "n_total_items": 13,
+          "tokens_in": 3002,
+          "tokens_out": 2076,
+          "cost_usd": 0.036305000000000004,
+          "latency_s": 36.537712844848635,
+          "playbook_chars_in_context": 2397,
+          "sections_in_context": 6,
+          "router_sections_chosen": [
+            "Contract Templates",
+            "Compliance",
+            "Vendor & Customer History",
+            "Banking & Payments",
+            "Equity & Cap Table",
+            "Approvals & Routing"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 1.0,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": "claude-haiku-4-5",
+          "hyde_hypothetical_preview": "# Scientific Advisor Onboarding \u2014 International Payments\n\n- **Advisor Classification & Documentation**: Classify Rafael Costa as a non-employee advisor under the Scientific Advisory Board (v2.3). Collect completed W-8BEN-E form (for US tax treaty benefits) and advisor agreement (template: SAB-Agreem",
+          "seed": 2,
+          "plan": {
+            "actions": [
+              "Use advisor agreement template v1.4 (not IC v2.1, MSA v3.2, or any generic template) for Dr. Costa's SAB engagement, as he is a scientific advisor \u2014 v1.4 contains the mandatory IP assignment language added by Marcus after the 2024 patent dispute.",
+              "Include the standard equity grant of 0.05% vesting over the 12-month engagement term in the advisor agreement, unless Marcus explicitly overrides this default.",
+              "Determine whether Dr. Costa will access confidential Helix research \u2014 if yes, attach the IP/confidentiality addendum to the v1.4 agreement (this addendum replaces the default v1.4 IP language in that scenario).",
+              "Surface and document whether Dr. Costa holds any conflicting positions at other biotechs that require non-compete disclosure before finalizing the engagement.",
+              "Flag Dr. Costa's compensation ($36,000 annually = $3,000/month x 12) for 1099-NEC issuance at year-end, as it exceeds the $600 threshold \u2014 note that he is US-tax-reportable only if applicable; confirm his US tax status and W-8BEN-E applicability given Brazil residency.",
+              "Conduct an independent-contractor classification review per the 2023 misclassification precedent to confirm Dr. Costa qualifies as a true independent contractor (1099) rather than W-2 before finalizing classification.",
+              "Route all monthly payments to Dr. Costa through Wise (not Mercury), as Helix uses Wise exclusively for international/cross-border payments since Q2 2024.",
+              "Do NOT update bank account details for Dr. Costa based solely on his email submission \u2014 verify the new bank account details through a secondary, out-of-band confirmation channel (e.g., a direct video or phone call with Dr. Costa) before entering them into Wise, to guard against payment fraud/BEC attack.",
+              "Obtain Marcus's approval before processing any payment, as each $3,000 monthly payment is under the $5,000 single-spend threshold \u2014 however, confirm whether the total contract value ($36,000) or any single disbursement triggers the >$5,000 CEO approval rule; if any payment batch or advance exceeds $5,000, Marcus must approve before processing.",
+              "Once all onboarding steps are complete, execute the advisor agreement and retain a fully signed copy in Helix's contract management system."
+            ],
+            "questions": [
+              "Will Dr. Costa access confidential Helix research? This determines whether the IP/confidentiality addendum must be attached to the v1.4 agreement.",
+              "Does Dr. Costa hold any conflicting positions at other biotech companies that would require non-compete disclosure?",
+              "Has Marcus explicitly reviewed and approved the standard 0.05% equity grant, or does he wish to override the default for this engagement?",
+              "How were Dr. Costa's new bank account details submitted \u2014 was it via email only? Has anyone verbally or via video confirmed the new details directly with Dr. Costa to rule out a BEC/fraud scenario?",
+              "What is Dr. Costa's US tax status? As a Brazil-based advisor, is he subject to US tax reporting, and has he completed a W-8BEN or equivalent form?",
+              "Will any individual payment or disbursement to Dr. Costa exceed $5,000 (e.g., advance payments or grouped disbursements), triggering the mandatory Marcus approval threshold?",
+              "Has the independent-contractor classification review been completed and documented per the 2023 misclassification precedent?"
+            ],
+            "risks": [
+              "FRAUD RISK \u2014 HIGH: Dr. Costa submitted new bank account details, which is a classic business email compromise (BEC) vector. Updating payment details without out-of-band verification could result in funds being misdirected to a fraudulent account. Do not update bank details until confirmed directly with Dr. Costa via phone or video.",
+              "TEMPLATE RISK: Using the wrong contract template (e.g., IC v2.1 or MSA v3.2) for an SAB engagement would omit the critical IP assignment language Marcus added after the 2024 patent dispute, creating IP ownership exposure.",
+              "MISCLASSIFICATION RISK: Failing to complete the independent-contractor classification review before signing exposes Helix to the same misclassification liability flagged in the 2023 precedent.",
+              "PAYMENT ROUTING RISK: Routing international payments through Mercury instead of Wise would violate Helix's current banking policy and may result in excessive fees or processing issues.",
+              "IP LEAKAGE RISK: If Dr. Costa accesses confidential research without the IP/confidentiality addendum in place, Helix's proprietary information may not be adequately protected.",
+              "APPROVAL RISK: Processing any payment exceeding $5,000 without Marcus's prior approval violates Helix's spend policy \u2014 confirm disbursement structure to ensure compliance.",
+              "COMPLIANCE RISK: Failing to properly assess Dr. Costa's tax reporting obligations (US vs. Brazil) could result in incorrect or missing 1099-NEC or W-8BEN documentation at year-end."
+            ]
+          },
+          "judgment": {
+            "n_covered": 12,
+            "n_missing": 1,
+            "missing": [
+              "Has Priya reviewed his scientific background? Helix's standard for technical hires (from T3 pattern)"
+            ]
+          }
+        }
+      ]
+    },
+    "customer_expansion": {
+      "warm_rag": [
+        {
+          "overall_recall": 0.5454545454545454,
+          "recall_actions": 0.6666666666666666,
+          "recall_questions": 0.3333333333333333,
+          "recall_risks": 0.5,
+          "recall_by_category": {
+            "Approvals & Routing": 1.0,
+            "Contract Templates": 1.0,
+            "Compliance": 0.6666666666666666,
+            "Vendor & Customer History": 0.0,
+            "Banking & Payments": 0.0
+          },
+          "n_covered": 6,
+          "n_missing": 5,
+          "n_total_items": 11,
+          "tokens_in": 2451,
+          "tokens_out": 1414,
+          "cost_usd": 0.028564,
+          "latency_s": 27.35,
+          "playbook_chars_in_context": 2148,
+          "sections_in_context": 4,
+          "router_sections_chosen": [
+            "Approvals & Routing",
+            "Vendor & Customer History",
+            "Contract Templates",
+            "Equity & Cap Table"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 0.6,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": null,
+          "hyde_hypothetical_preview": null,
+          "seed": 0,
+          "plan": {
+            "actions": [
+              "Confirm Daniel's routing is correct for current $40K ARR tier (Daniel owns $25K\u2013$100K); note that post-upgrade the account will be $80K ARR, which still falls within Daniel's tier ($25K\u2013$100K), so no CS ownership reassignment is required \u2014 Daniel retains ownership",
+              "Pull Beacon Labs' existing contract from NetSuite to review current MSA version, terms, and any amendments before drafting the upgrade",
+              "Verify that Beacon Labs' existing MSA is on template v3.2 (not v3.1); if they are on v3.1, the upgrade is an opportunity to migrate them to v3.2 to fix the limitation-of-liability issue and add explicit opt-in auto-renewal language",
+              "Draft a contract amendment or order form reflecting the ARR increase from $40K to $80K and adding SAML SSO as a contracted feature; ensure the document references MSA v3.2 as the governing agreement",
+              "Verify that the Beacon Labs signatory on the upgraded agreement holds VP-level or above authority on the customer side, per Helix MSA signing policy",
+              "Submit the upgraded contract value change for Marcus's awareness \u2014 while $80K ARR is below the $100K threshold for direct Marcus CS involvement, confirm whether the incremental spend or any associated invoice exceeds $5,000 to determine if Marcus's spend approval is required before payment processing",
+              "Schedule or confirm the mandatory 14-day customer success check-in is on the calendar with Daniel for the expanded engagement (treat the upgrade as a new onboarding touchpoint per policy)",
+              "Coordinate with the technical/engineering team to scope and schedule SAML SSO provisioning for Beacon Labs, confirming any prerequisites (IdP details, domain, admin contact) needed from the customer side",
+              "Send Beacon Labs a kickoff communication via Daniel confirming the upgrade timeline, SAML SSO setup steps, and their next check-in date"
+            ],
+            "questions": [
+              "Has Marcus explicitly approved the contract amendment if any associated invoice or payment tied to this upgrade exceeds $5,000?",
+              "Is Beacon Labs currently on MSA v3.2 or the older v3.1? If v3.1, do we have sign-off to migrate them to v3.2 as part of this amendment?",
+              "Who is the Beacon Labs signatory for the upgraded agreement, and has their VP-level or above authority been verified?",
+              "What is the desired effective date for the $80K ARR upgrade \u2014 immediate, next billing cycle, or contract anniversary?",
+              "Has Beacon Labs provided their IdP details (e.g., Okta, Azure AD, Google) and technical contact for SAML SSO configuration?",
+              "Is the SAML SSO feature already available in Beacon Labs' new tier, or does it require a custom scope/engineering effort with a separate timeline?",
+              "Should the 14-day check-in be rescheduled fresh from the upgrade date, or is there an existing check-in cadence with Daniel that covers this?"
+            ],
+            "risks": [
+              "If Beacon Labs is on MSA v3.1, proceeding with the upgrade without migrating to v3.2 leaves Helix exposed to the limitation-of-liability gap and the auto-renewal ambiguity that caused the Acme Bio dispute",
+              "If the upgraded contract invoice or any payment exceeds $5,000 and is processed without Marcus's approval, it violates Helix's spend approval policy regardless of urgency",
+              "Failure to verify VP-level signatory authority on the Beacon Labs side could result in an unenforceable amendment",
+              "Skipping the 14-day CS check-in for the upgraded engagement risks early churn, which was the exact scenario this policy was designed to prevent",
+              "Delay in gathering SAML SSO technical requirements from Beacon Labs (IdP type, metadata, admin contact) could push the go-live date and create customer dissatisfaction at a critical expansion moment",
+              "If ARR grows further (e.g., future upsell beyond $100K), CS ownership must be reassigned to Marcus \u2014 flag this account for monitoring"
+            ]
+          },
+          "judgment": {
+            "n_covered": 6,
+            "n_missing": 5,
+            "missing": [
+              "Cross-check the Q1 auto-renewal dispute (from T5) is fully resolved and logged before extending \u2014 board KPI requirement",
+              "Update Beacon's recurring ACH in Mercury for the new $80K ARR billing",
+              "Does Beacon's new ARR tier change data residency requirements? Default is still US-East but worth confirming (from T2)",
+              "Has the previously disputed invoice from T5 been credited or refunded if applicable? Confirm before billing the new tier",
+              "Beacon's open dispute (per T5) must be resolved within 14 days per Q1 2025 board KPI \u2014 confirm closed before expansion"
+            ]
+          }
+        },
+        {
+          "overall_recall": 0.45454545454545453,
+          "recall_actions": 0.6666666666666666,
+          "recall_questions": 0.3333333333333333,
+          "recall_risks": 0.0,
+          "recall_by_category": {
+            "Approvals & Routing": 1.0,
+            "Contract Templates": 1.0,
+            "Compliance": 0.3333333333333333,
+            "Vendor & Customer History": 0.0,
+            "Banking & Payments": 0.0
+          },
+          "n_covered": 5,
+          "n_missing": 6,
+          "n_total_items": 11,
+          "tokens_in": 2461,
+          "tokens_out": 1429,
+          "cost_usd": 0.028819,
+          "latency_s": 26.445,
+          "playbook_chars_in_context": 2148,
+          "sections_in_context": 4,
+          "router_sections_chosen": [
+            "Approvals & Routing",
+            "Vendor & Customer History",
+            "Contract Templates",
+            "Equity & Cap Table"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 0.6,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": null,
+          "hyde_hypothetical_preview": null,
+          "seed": 1,
+          "plan": {
+            "actions": [
+              "Confirm Daniel as the CS owner for Beacon Labs at current $40K ARR tier ($25K\u2013$100K range); note that the expanded $80K ARR contract keeps Beacon Labs within Daniel's tier ($25K\u2013$100K), so no CS ownership reassignment is required \u2014 Daniel remains the assigned CS owner post-upgrade.",
+              "Pull the existing Beacon Labs MSA from NetSuite and verify it is on Helix MSA template v3.2 (not v3.1); if the current agreement is on v3.1, a contract amendment or restatement on v3.2 is required before executing the expansion to remediate the limitation-of-liability bug and missing auto-renewal language.",
+              "Draft a contract amendment or order form addendum reflecting the ARR expansion from $40K to $80K, using Helix MSA template v3.2 as the governing document; include the SAML SSO feature enablement as an explicit line item or exhibit in the amendment.",
+              "Verify that the Beacon Labs signatory on the amended/expanded contract holds VP-level or above authority on the customer side, per Helix MSA signing policy; do not countersign until counterparty signature authority is confirmed.",
+              "Confirm whether the $80K ARR expansion triggers any incremental invoice or upfront payment exceeding $5,000; if so, route the payment for Marcus's approval before processing, per Helix's spend approval policy.",
+              "Coordinate with the product/engineering team to provision SAML SSO for Beacon Labs once the amended contract is fully executed; do not enable the feature prior to contract execution.",
+              "Schedule the mandatory 14-day customer success check-in with Beacon Labs post-upgrade execution, per Helix policy; assign Daniel as the point of contact for this check-in given his CS ownership of the account.",
+              "Log all contract changes, ARR updates, and CS ownership confirmation in NetSuite to keep the customer record current."
+            ],
+            "questions": [
+              "Is the current Beacon Labs MSA on template v3.2 or the older v3.1? This determines whether a full restatement is needed versus a simple amendment.",
+              "Who is the named signatory at Beacon Labs for the expanded contract, and has their VP-level or above authority been verified?",
+              "What is the billing structure for the $80K ARR expansion \u2014 annual upfront, monthly, or other \u2014 and will any single payment or invoice exceed $5,000, requiring Marcus's pre-payment approval?",
+              "Is SAML SSO included in the standard $80K ARR tier, or does it require a separate add-on SKU or pricing line item in the amendment?",
+              "Does the upgrade take effect at the start of a new contract term, or mid-cycle with a prorated true-up? This affects invoice amounts and timing.",
+              "Has Daniel confirmed he has capacity to own the expanded account and lead the 14-day post-upgrade check-in?"
+            ],
+            "risks": [
+              "If the existing Beacon Labs MSA is on v3.1, executing the expansion without migrating to v3.2 leaves Helix exposed to the known limitation-of-liability gap and the auto-renewal ambiguity that caused the 2024 Acme Bio dispute.",
+              "If the Beacon Labs signatory lacks VP-level authority, the amended MSA will be invalid under Helix policy, creating contract enforceability risk.",
+              "Enabling SAML SSO before the amended contract is fully executed creates a situation where a premium feature is live without contractual coverage, posing both commercial and security risk.",
+              "Failure to route any invoice or payment over $5,000 to Marcus for pre-approval before processing would violate Helix's spend policy, even if the expansion is already agreed upon commercially.",
+              "Skipping or delaying the mandatory 14-day check-in post-upgrade risks early dissatisfaction going undetected \u2014 the same pattern that led to the first-month churn issue that prompted the policy in 2024.",
+              "At $80K ARR, Beacon Labs remains in Daniel's tier, but if any future expansion pushes ARR above $100K, Marcus must be directly involved; this threshold should be flagged proactively so the transition is not missed."
+            ]
+          },
+          "judgment": {
+            "n_covered": 5,
+            "n_missing": 6,
+            "missing": [
+              "Cross-check the Q1 auto-renewal dispute (from T5) is fully resolved and logged before extending \u2014 board KPI requirement",
+              "Update Beacon's recurring ACH in Mercury for the new $80K ARR billing",
+              "Does Beacon's new ARR tier change data residency requirements? Default is still US-East but worth confirming (from T2)",
+              "Has the previously disputed invoice from T5 been credited or refunded if applicable? Confirm before billing the new tier",
+              "Sales tax: Helix only collects in CA and NY per the 2023 settlement \u2014 confirm Beacon's billing state given the increased contract size (from T2)",
+              "Beacon's open dispute (per T5) must be resolved within 14 days per Q1 2025 board KPI \u2014 confirm closed before expansion"
+            ]
+          }
+        },
+        {
+          "overall_recall": 0.45454545454545453,
+          "recall_actions": 0.6666666666666666,
+          "recall_questions": 0.3333333333333333,
+          "recall_risks": 0.0,
+          "recall_by_category": {
+            "Approvals & Routing": 1.0,
+            "Contract Templates": 1.0,
+            "Compliance": 0.3333333333333333,
+            "Vendor & Customer History": 0.0,
+            "Banking & Payments": 0.0
+          },
+          "n_covered": 5,
+          "n_missing": 6,
+          "n_total_items": 11,
+          "tokens_in": 2477,
+          "tokens_out": 1442,
+          "cost_usd": 0.029062,
+          "latency_s": 28.245,
+          "playbook_chars_in_context": 2148,
+          "sections_in_context": 4,
+          "router_sections_chosen": [
+            "Approvals & Routing",
+            "Vendor & Customer History",
+            "Contract Templates",
+            "Equity & Cap Table"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 0.6,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": null,
+          "hyde_hypothetical_preview": null,
+          "seed": 2,
+          "plan": {
+            "actions": [
+              "Confirm Daniel as CS owner for this engagement \u2014 Beacon Labs is currently at $40K ARR (within Daniel's $25K\u2013$100K tier), and the expanded contract at $80K ARR still falls within Daniel's tier, so no CS ownership reassignment is required; keep Daniel as the assigned CS owner throughout.",
+              "Pull the current Beacon Labs contract from NetSuite and review existing terms, including current ARR, contract end date, auto-renewal language, and any SAML SSO entitlements or add-on clauses.",
+              "Prepare a contract amendment or new order form reflecting the ARR expansion from $40K to $80K; ensure the executed agreement or any new MSA uses Helix MSA template v3.2 (not v3.1) to include correct limitation-of-liability language and explicit opt-in auto-renewal language.",
+              "Verify that the Beacon Labs signatory on any amended or new agreement holds VP-level or above authority on their side, per Helix's MSA signature authority policy.",
+              "Coordinate with the product/engineering team to scope and confirm SAML SSO delivery timeline, any prerequisites (identity provider details from Beacon Labs, domain configuration), and whether SSO is included in the $80K tier or requires a separate line item.",
+              "Draft the upgraded order form or amendment with the $80K ARR figure and SAML SSO entitlement explicitly documented, and route to Marcus for approval if any associated payment or new spend on Helix's side exceeds $5,000 (note: this is a customer revenue expansion, so internal spend approval may not apply, but confirm no implementation costs or vendor costs are triggered that exceed the threshold).",
+              "Schedule the mandatory 14-day customer success check-in for the contract expansion/upgrade milestone, per Helix's post-onboarding policy, to ensure Beacon Labs is successfully adopting the new tier and SSO feature.",
+              "Once the amendment is fully executed, update Beacon Labs' ARR record in NetSuite from $40K to $80K and update any CRM records accordingly.",
+              "Notify Daniel of all steps completed so he can manage the customer relationship and communicate timeline to Beacon Labs."
+            ],
+            "questions": [
+              "Does Beacon Labs already have a signed MSA on file, and if so, is it on v3.2 or an older version that needs to be replaced or amended?",
+              "Who is the Beacon Labs signatory for the amendment \u2014 what is their title, and can we confirm they are VP-level or above?",
+              "Is SAML SSO included in the $80K ARR tier as a standard feature, or does it need to be priced and added as a separate line item or add-on?",
+              "What is the desired effective date for the upgrade \u2014 is Beacon Labs asking for mid-term expansion or at renewal?",
+              "Are there any implementation or infrastructure costs on Helix's side to enable SAML SSO for Beacon Labs that would exceed $5,000 and require Marcus's approval?",
+              "Does the current Beacon Labs contract have auto-renewal language, and does the expansion reset or extend the contract term?",
+              "Has Daniel already communicated any pricing or timeline commitments to Beacon Labs that we need to honor in the amendment?"
+            ],
+            "risks": [
+              "If the existing Beacon Labs MSA is on template v3.1, it contains a limitation-of-liability bug and lacks proper auto-renewal language \u2014 any amendment or renewal must migrate to v3.2 to avoid legal exposure.",
+              "If the Beacon Labs signatory on the amended agreement is not VP-level or above, the contract will not meet Helix's signature authority requirement and could be invalid or unenforceable.",
+              "Failure to schedule the mandatory 14-day CS check-in at the upgrade milestone risks early dissatisfaction going undetected, which was the root cause of the 2024 first-month churn issue.",
+              "If SAML SSO delivery timeline is not confirmed before the amendment is signed, Beacon Labs may have contractual expectations Helix cannot meet, creating a dispute or churn risk.",
+              "At $80K ARR, Beacon Labs remains within Daniel's CS tier, but if any future expansion pushes ARR above $100K, Marcus must be looped in directly \u2014 flag this threshold proactively to Daniel."
+            ]
+          },
+          "judgment": {
+            "n_covered": 5,
+            "n_missing": 6,
+            "missing": [
+              "Cross-check the Q1 auto-renewal dispute (from T5) is fully resolved and logged before extending \u2014 board KPI requirement",
+              "Update Beacon's recurring ACH in Mercury for the new $80K ARR billing",
+              "Does Beacon's new ARR tier change data residency requirements? Default is still US-East but worth confirming (from T2)",
+              "Has the previously disputed invoice from T5 been credited or refunded if applicable? Confirm before billing the new tier",
+              "Sales tax: Helix only collects in CA and NY per the 2023 settlement \u2014 confirm Beacon's billing state given the increased contract size (from T2)",
+              "Beacon's open dispute (per T5) must be resolved within 14 days per Q1 2025 board KPI \u2014 confirm closed before expansion"
+            ]
+          }
+        }
+      ],
+      "warm_rag_hyde": [
+        {
+          "overall_recall": 0.6363636363636364,
+          "recall_actions": 0.6666666666666666,
+          "recall_questions": 0.6666666666666666,
+          "recall_risks": 0.5,
+          "recall_by_category": {
+            "Approvals & Routing": 1.0,
+            "Contract Templates": 1.0,
+            "Compliance": 0.3333333333333333,
+            "Vendor & Customer History": 0.6666666666666666,
+            "Banking & Payments": 0.0
+          },
+          "n_covered": 7,
+          "n_missing": 4,
+          "n_total_items": 11,
+          "tokens_in": 2653,
+          "tokens_out": 1863,
+          "cost_usd": 0.030946999999999995,
+          "latency_s": 34.11687687301636,
+          "playbook_chars_in_context": 2226,
+          "sections_in_context": 4,
+          "router_sections_chosen": [
+            "Vendor & Customer History",
+            "Approvals & Routing",
+            "Contract Templates",
+            "Equity & Cap Table"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 0.6,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": "claude-haiku-4-5",
+          "hyde_hypothetical_preview": "# Contract Upgrade & Feature Implementation \u2014 Beacon Labs\n\n\u2022 **Upgrade Authorization & Timing**: Daniel (Sales) routes upgrade requests >$50K ARR to Ops Lead for approval. Confirm Beacon Labs meets expansion criteria (payment current, no open support tickets >P2, contract renewal >60 days out). Docu",
+          "seed": 0,
+          "plan": {
+            "actions": [
+              "Confirm the ARR upgrade details: current contract is $40K ARR moving to $80K ARR, which keeps Beacon Labs in the $25K\u2013$100K tier \u2014 CS ownership remains with Daniel (no re-routing required since $80K is still under $100K threshold).",
+              "Pull the existing Beacon Labs MSA from NetSuite and verify it was executed on Helix MSA template v3.2 (not v3.1); if v3.1 was used, a contract amendment or re-execution on v3.2 is required before the upgrade is processed.",
+              "Verify the counterparty signatory on the existing and any amended/new MSA holds VP-level or above authority on the Beacon Labs side, per Helix signature authority policy.",
+              "Draft a contract amendment (using MSA v3.2 as the base) reflecting the ARR increase from $40K to $80K; include updated scope, pricing, and any SAML SSO-related service terms or entitlements.",
+              "Confirm whether the $80K ARR upgrade generates any incremental invoices or upfront fees exceeding $5,000; if so, route for CEO (Marcus) approval before payment is processed.",
+              "Coordinate with the product/engineering team to scope and confirm SAML SSO enablement for Beacon Labs \u2014 document any technical prerequisites, timeline, and whether SSO is included in the $80K tier or requires a separate add-on order form.",
+              "Once the amended contract is countersigned, schedule or confirm the mandatory 14-day customer success check-in with Daniel and Beacon Labs (if this upgrade constitutes a new onboarding milestone, ensure the check-in is logged in the CS system).",
+              "Update Beacon Labs' ARR and contract terms in NetSuite to reflect the $80K ARR and new contract end date.",
+              "Notify Daniel of all completed steps and confirm he retains CS ownership at the $80K tier."
+            ],
+            "questions": [
+              "Is the existing Beacon Labs MSA on template v3.2 or v3.1? If v3.1, does legal want a full re-paper or a targeted amendment?",
+              "Who is the Beacon Labs signatory on the amendment \u2014 do we have confirmation they are VP-level or above?",
+              "Is SAML SSO included in the $80K ARR tier by default, or is it a separately priced feature requiring an add-on order form?",
+              "What is the desired effective date for the ARR upgrade and SSO enablement?",
+              "Does the upgrade involve any upfront payment or true-up invoice over $5,000 that would require Marcus's approval before processing?",
+              "Is the 14-day CS check-in already on record for Beacon Labs from their original onboarding, or does this expansion trigger a new one that needs to be scheduled?",
+              "Does Daniel need any internal briefing materials or updated account details prepared for the CS check-in with Beacon Labs?"
+            ],
+            "risks": [
+              "If the existing MSA is on v3.1, proceeding without re-papering exposes Helix to the limitation-of-liability bug and missing auto-renewal language from the Acme Bio dispute \u2014 must be resolved before the amendment is finalized.",
+              "Failure to verify VP-level signatory authority on the Beacon Labs amendment could render the contract unenforceable per Helix policy.",
+              "Any invoice or payment over $5,000 processed without Marcus's prior approval violates Helix spend policy and could cause a compliance issue.",
+              "If SAML SSO is scoped or promised before the product team confirms feasibility and timeline, Beacon Labs may have contractual expectations Helix cannot meet, creating a churn or dispute risk.",
+              "Skipping or delaying the 14-day CS check-in (if applicable to this expansion) violates the post-2024 churn-prevention policy and could increase early churn risk at the new ARR level.",
+              "ARR tier boundary risk: if Beacon Labs expands further beyond $100K in a future cycle, CS ownership must shift to Marcus \u2014 flag this account for tier monitoring."
+            ]
+          },
+          "judgment": {
+            "n_covered": 7,
+            "n_missing": 4,
+            "missing": [
+              "Cross-check the Q1 auto-renewal dispute (from T5) is fully resolved and logged before extending \u2014 board KPI requirement",
+              "Update Beacon's recurring ACH in Mercury for the new $80K ARR billing",
+              "Does Beacon's new ARR tier change data residency requirements? Default is still US-East but worth confirming (from T2)",
+              "Sales tax: Helix only collects in CA and NY per the 2023 settlement \u2014 confirm Beacon's billing state given the increased contract size (from T2)"
+            ]
+          }
+        },
+        {
+          "overall_recall": 0.45454545454545453,
+          "recall_actions": 0.6666666666666666,
+          "recall_questions": 0.3333333333333333,
+          "recall_risks": 0.0,
+          "recall_by_category": {
+            "Approvals & Routing": 1.0,
+            "Contract Templates": 1.0,
+            "Compliance": 0.3333333333333333,
+            "Vendor & Customer History": 0.0,
+            "Banking & Payments": 0.0
+          },
+          "n_covered": 5,
+          "n_missing": 6,
+          "n_total_items": 11,
+          "tokens_in": 2766,
+          "tokens_out": 1885,
+          "cost_usd": 0.032355,
+          "latency_s": 42.10911580276489,
+          "playbook_chars_in_context": 2282,
+          "sections_in_context": 4,
+          "router_sections_chosen": [
+            "Contract Templates",
+            "Vendor & Customer History",
+            "Approvals & Routing",
+            "Equity & Cap Table"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 0.6,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": "claude-haiku-4-5",
+          "hyde_hypothetical_preview": "# Contract Upgrade & Feature Request \u2014 Beacon Labs\n\n- **Tier Upgrade Authority**: Revenue Operations Lead (Daniel) has routing authority for ARR expansions under $150K. Approve the $80K contract immediately in Salesforce. Update contract end date to match current renewal cycle (check Beacon's existi",
+          "seed": 1,
+          "plan": {
+            "actions": [
+              "Confirm ARR tier transition: Beacon Labs is moving from $40K ARR (Daniel's tier: $25K\u2013$100K) to $80K ARR, which remains within the $25K\u2013$100K tier, so Daniel retains CS ownership \u2014 no reassignment required. Document this confirmation in the CRM/account record.",
+              "Pull the current Beacon Labs contract from NetSuite/contract repository and identify the existing MSA version in use. If not already on MSA v3.2, flag for an amendment or full re-paper using MSA v3.2 (not v3.1) to capture the correct limitation-of-liability language and auto-renewal opt-in provisions.",
+              "Draft a contract amendment or order form reflecting the ARR expansion from $40K to $80K, using MSA v3.2 as the governing template. Route to legal (Marcus) for review before sending to Beacon Labs.",
+              "Confirm that the $80K ARR upgrade does not itself trigger any spend >$5,000 on Helix's side that would require Marcus's CEO approval \u2014 however, note that any Helix-side implementation costs or vendor spend associated with the SAML SSO setup exceeding $5,000 will require Marcus's explicit approval before processing.",
+              "Coordinate with the engineering/product team to scope and schedule the SAML SSO implementation for Beacon Labs, confirming timeline, any third-party vendor costs, and whether those costs exceed the $5K approval threshold.",
+              "If any vendor invoices arise from the SAML SSO implementation (e.g., identity provider or integration tooling), ensure each invoice is matched against contracted rates in NetSuite before approval \u2014 especially if BioReagents Inc or any vendor with a dispute history is involved.",
+              "Schedule or verify that Beacon Labs has had their mandatory 14-day customer success check-in on record from original onboarding. If the upgrade is treated as a new onboarding event, schedule a fresh 14-day check-in with Daniel as CS owner.",
+              "Update Beacon Labs' account record in the CRM to reflect new ARR of $80K, CS owner Daniel, SAML SSO feature entitlement, and contract amendment execution date once signed.",
+              "Notify Daniel of all steps taken and confirm he is aligned on the account transition plan and SAML SSO delivery timeline."
+            ],
+            "questions": [
+              "Is the current Beacon Labs contract on MSA v3.2, or does it need to be re-papered as part of this upgrade?",
+              "What is the estimated engineering/vendor cost for implementing SAML SSO for Beacon Labs \u2014 does it exceed $5,000, triggering Marcus's CEO approval requirement?",
+              "Does Beacon Labs want SAML SSO as a mid-term amendment effective immediately, or aligned to their renewal date? This affects how the order form and billing are structured.",
+              "Has Beacon Labs completed their original 14-day customer success check-in? If the upgrade constitutes a new onboarding milestone, should Daniel schedule a fresh check-in?",
+              "Are there any side agreements, custom terms, or addenda in the current Beacon Labs contract that need to be carried forward or renegotiated in the $80K amendment?",
+              "Does the $80K ARR expansion change any SLA commitments or support tier entitlements that need to be reflected in the amended contract?"
+            ],
+            "risks": [
+              "Using the wrong contract template (e.g., MSA v3.1 instead of v3.2) would reintroduce the limitation-of-liability bug and omit auto-renewal opt-in language \u2014 must verify template version before execution.",
+              "If SAML SSO implementation costs exceed $5,000 and are paid without Marcus's prior approval, this violates Helix's spend approval policy regardless of urgency or invoice age.",
+              "Failing to schedule the mandatory 14-day customer success check-in (if applicable to this upgrade event) risks non-compliance with the post-2024 churn prevention policy and could jeopardize early retention signals for the expanded account.",
+              "At $80K ARR, Beacon Labs remains in Daniel's tier, but if the expansion were to cross $100K in a future upsell, Marcus would need to be directly involved \u2014 this threshold should be flagged proactively so no future handoff is missed.",
+              "Delaying the contract amendment while SAML SSO implementation proceeds could leave Helix in a position of delivering expanded services without a signed agreement covering the new ARR \u2014 ensure amendment is executed before or concurrent with SSO delivery."
+            ]
+          },
+          "judgment": {
+            "n_covered": 5,
+            "n_missing": 6,
+            "missing": [
+              "Cross-check the Q1 auto-renewal dispute (from T5) is fully resolved and logged before extending \u2014 board KPI requirement",
+              "Update Beacon's recurring ACH in Mercury for the new $80K ARR billing",
+              "Does Beacon's new ARR tier change data residency requirements? Default is still US-East but worth confirming (from T2)",
+              "Has the previously disputed invoice from T5 been credited or refunded if applicable? Confirm before billing the new tier",
+              "Sales tax: Helix only collects in CA and NY per the 2023 settlement \u2014 confirm Beacon's billing state given the increased contract size (from T2)",
+              "Beacon's open dispute (per T5) must be resolved within 14 days per Q1 2025 board KPI \u2014 confirm closed before expansion"
+            ]
+          }
+        },
+        {
+          "overall_recall": 0.5454545454545454,
+          "recall_actions": 0.6666666666666666,
+          "recall_questions": 0.6666666666666666,
+          "recall_risks": 0.0,
+          "recall_by_category": {
+            "Approvals & Routing": 1.0,
+            "Contract Templates": 1.0,
+            "Compliance": 0.3333333333333333,
+            "Vendor & Customer History": 0.3333333333333333,
+            "Banking & Payments": 0.0
+          },
+          "n_covered": 6,
+          "n_missing": 5,
+          "n_total_items": 11,
+          "tokens_in": 2575,
+          "tokens_out": 1643,
+          "cost_usd": 0.028990999999999996,
+          "latency_s": 35.82213381004334,
+          "playbook_chars_in_context": 2148,
+          "sections_in_context": 4,
+          "router_sections_chosen": [
+            "Approvals & Routing",
+            "Vendor & Customer History",
+            "Contract Templates",
+            "Equity & Cap Table"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 0.6,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": "claude-haiku-4-5",
+          "hyde_hypothetical_preview": "# Contract Upgrade & Feature Implementation \u2014 Beacon Labs\n\n- **Tier threshold trigger:** Customers moving from $40K to $80K ARR automatically qualify for Enterprise tier features. Initiate upgrade in Salesforce immediately; update opportunity stage to \"Negotiation\" and assign to Sales Lead (currentl",
+          "seed": 2,
+          "plan": {
+            "actions": [
+              "Confirm Daniel as the CS owner for Beacon Labs at current $40K ARR tier (within $25K\u2013$100K range); note that the upgraded $80K ARR still falls within Daniel's ownership tier ($25K\u2013$100K), so no CS owner reassignment is required \u2014 Daniel retains ownership post-upgrade.",
+              "Pull the existing Beacon Labs contract from NetSuite and review current terms, including any SAML SSO entitlements, pricing structure, and auto-renewal language, before drafting the amendment.",
+              "Prepare a contract amendment or order form addendum using Helix MSA template v3.2 (not v3.1) to reflect the ARR upgrade from $40K to $80K and to add SAML SSO as an included feature/entitlement.",
+              "Verify that the Beacon Labs signatory on the upgraded contract holds VP-level or above authority on the customer side, per Helix's MSA signing policy \u2014 request a title confirmation or org chart snippet from the Beacon Labs contact before countersigning.",
+              "Check whether the $80K ARR upgrade triggers any invoicing or payment above the $5,000 threshold (it almost certainly does); ensure Marcus approves any resulting invoice or payment before processing, per Helix's spend approval policy.",
+              "Coordinate with the product/engineering team to scope and schedule SAML SSO enablement for Beacon Labs, confirming timeline and any configuration requirements (IdP details, domain, etc.) needed from the customer.",
+              "Schedule the mandatory 14-day customer success check-in with Beacon Labs post-upgrade activation, per Helix's post-onboarding policy \u2014 assign this to Daniel as CS owner and log it in the CRM.",
+              "Once the amendment is fully executed, update Beacon Labs' ARR record in NetSuite from $40K to $80K and update any relevant customer tier or entitlement flags."
+            ],
+            "questions": [
+              "Who is the current Beacon Labs signatory, and do they hold VP-level or above authority? If not, who at Beacon Labs is the appropriate VP+ signer for the upgraded MSA?",
+              "Is SAML SSO currently available as a product feature for Beacon Labs' plan, or does this require an engineering lift or feature flag enablement? What is the estimated timeline?",
+              "Does Beacon Labs want to co-term the upgrade with their current contract renewal date, or start a new term from the upgrade effective date?",
+              "Are there any outstanding support issues, unpaid invoices, or account health concerns Daniel is aware of that should be resolved before formalizing the expansion?",
+              "Will the $80K ARR be invoiced as a new annual invoice (triggering Marcus's >$5K approval) or as a prorated delta \u2014 and in either case, has Marcus been looped in for approval?"
+            ],
+            "risks": [
+              "If the Beacon Labs signatory lacks VP-level authority and signs the amended MSA anyway, the contract may be invalid under Helix policy \u2014 must be verified before countersigning.",
+              "Using MSA v3.1 instead of v3.2 would introduce the limitation-of-liability bug and missing auto-renewal opt-in language; confirm the correct template is used for the amendment.",
+              "Failure to schedule the mandatory 14-day CS check-in post-upgrade could violate Helix's post-onboarding policy and increase churn risk, especially given the expansion investment.",
+              "If payment for the $80K contract is processed without Marcus's explicit approval, it would violate Helix's >$5K spend approval policy \u2014 this must not be bypassed even if the deal is time-sensitive.",
+              "SAML SSO misconfiguration or delayed enablement post-signature could damage the customer relationship and undermine the expansion justification \u2014 engineering readiness must be confirmed before committing to a go-live date in the contract."
+            ]
+          },
+          "judgment": {
+            "n_covered": 6,
+            "n_missing": 5,
+            "missing": [
+              "Cross-check the Q1 auto-renewal dispute (from T5) is fully resolved and logged before extending \u2014 board KPI requirement",
+              "Update Beacon's recurring ACH in Mercury for the new $80K ARR billing",
+              "Does Beacon's new ARR tier change data residency requirements? Default is still US-East but worth confirming (from T2)",
+              "Sales tax: Helix only collects in CA and NY per the 2023 settlement \u2014 confirm Beacon's billing state given the increased contract size (from T2)",
+              "Beacon's open dispute (per T5) must be resolved within 14 days per Q1 2025 board KPI \u2014 confirm closed before expansion"
+            ]
+          }
+        }
+      ]
+    },
+    "intl_contractor_batch": {
+      "warm_rag": [
+        {
+          "overall_recall": 0.8,
+          "recall_actions": 1.0,
+          "recall_questions": 0.5,
+          "recall_risks": 0.5,
+          "recall_by_category": {
+            "Contract Templates": 1.0,
+            "Banking & Payments": 1.0,
+            "Compliance": 0.5,
+            "Approvals & Routing": 1.0,
+            "Equity & Cap Table": 1.0
+          },
+          "n_covered": 8,
+          "n_missing": 2,
+          "n_total_items": 10,
+          "tokens_in": 2675,
+          "tokens_out": 1520,
+          "cost_usd": 0.030826,
+          "latency_s": 31.331,
+          "playbook_chars_in_context": 2439,
+          "sections_in_context": 6,
+          "router_sections_chosen": [
+            "Approvals & Routing",
+            "Equity & Cap Table",
+            "Contract Templates",
+            "Compliance",
+            "Vendor & Customer History",
+            "Banking & Payments"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 1.0,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": null,
+          "hyde_hypothetical_preview": null,
+          "seed": 0,
+          "plan": {
+            "actions": [
+              "Initiate technical vetting by Priya (tech lead) for both Indian contract engineers before any contract is signed \u2014 this internal review is a mandatory prerequisite to contract execution per Helix policy",
+              "Use IC agreement template v2.1 (international version) for both engineers \u2014 this template includes the required W-8BEN-E provisions and mandatory 30-day notice clause; do not substitute MSA v3.2 or any domestic IC template",
+              "Include explicit no-equity language in both contracts: per Helix's post-2023 cap table cleanup policy, contractors engaged for exactly 6 months are at the boundary \u2014 confirm with Marcus whether these 6-month engagements qualify for equity eligibility; if not confirmed as over 6 months, default to excluding equity and state this clearly in the agreement",
+              "Obtain CEO (Marcus) approval before processing any payment: each engineer is at $9K/month, which exceeds the $5,000 single-spend threshold \u2014 every monthly invoice will require Marcus's sign-off before payment is released",
+              "Route all payments through Wise, not Mercury \u2014 both engineers are India-based international contractors; Mercury was deprecated for international transfers in Q2 2024",
+              "Collect W-8BEN-E forms from both engineers prior to first payment for tax compliance",
+              "Set up a recurring approval workflow reminder for Marcus each month to pre-approve the $9K payments for each engineer before disbursement via Wise",
+              "Document Priya's technical vetting sign-off in writing (email or Notion/internal system) and attach to each contractor's onboarding file before countersigning contracts",
+              "Confirm engagement start and end dates precisely \u2014 if either engagement is fewer than 6 months, equity exclusion is unambiguous; if exactly or over 6 months, flag for Marcus to make an explicit equity decision",
+              "File both contractor records for potential future compliance review given India-based cross-border classification"
+            ],
+            "questions": [
+              "Has Priya been briefed and is she available to complete technical vetting for both engineers promptly, given the request to move quickly?",
+              "Are these engagements exactly 6 months or potentially extendable? This determines whether equity eligibility could ever apply and whether the contracts need extension clauses",
+              "Will either engineer access Helix's confidential research or IP? If so, additional IP/confidentiality provisions may need to be incorporated into the IC v2.1 agreements",
+              "Do either of the engineers have existing employment or contractor arrangements with other biotech companies that could create IP ownership conflicts or require disclosure?",
+              "Has Marcus formally approved this expansion initiative and is he prepared to approve each monthly $9K payment per engineer ($18K/month combined) on an ongoing basis?",
+              "What are the intended start dates \u2014 is there a hard deadline driving the 'quickly' request, and is that timeline feasible given mandatory vetting and approval steps?",
+              "Are the engineers being paid in USD or INR? Wise supports both but the payment setup and currency conversion details should be confirmed upfront",
+              "Will these engineers be engaged as individuals or through an Indian entity (e.g., a staffing firm or their own company)? This affects which W-8 form applies and how the IC agreement is structured"
+            ],
+            "risks": [
+              "Skipping or rushing Priya's technical vetting to meet speed expectations is a policy violation \u2014 contracts cannot be signed until vetting is complete, and bypassing this creates legal and operational risk",
+              "Payments processed without Marcus's prior approval for amounts over $5K violate Helix's spend policy \u2014 given $9K/month per engineer, every single payment requires pre-approval; failure to build this into the workflow will cause compliance gaps",
+              "Using any template other than IC v2.1 (international) \u2014 e.g., a domestic IC template or MSA v3.2 \u2014 would omit legally required W-8BEN-E provisions and the 30-day notice clause mandated by Helix legal",
+              "If equity is inadvertently included in a sub-6-month or exactly-6-month contract without explicit Marcus override, it violates the post-2023 cap table cleanup policy and could create cap table complications",
+              "Using Mercury instead of Wise for payments would result in excessive fees and is contrary to Q2 2024 policy \u2014 anyone initiating payments must be explicitly directed to use Wise",
+              "If W-8BEN-E forms are not collected before payment, Helix may face US tax withholding obligations on payments to foreign contractors",
+              "Speed pressure ('set them up quickly') creates risk of skipping sequential mandatory steps (Priya vetting \u2192 contract signing \u2192 Marcus payment approval) \u2014 all three are non-negotiable and must remain in sequence",
+              "If either engineer is later found to be misclassified or has undisclosed IP encumbrances from other biotech roles, Helix could face IP ownership disputes or contractor misclassification liability"
+            ]
+          },
+          "judgment": {
+            "n_covered": 8,
+            "n_missing": 2,
+            "missing": [
+              "Will the contractors need GitHub or customer-data access? If yes, BAA + security training required (from T3)",
+              "India FEMA / RBI reporting for the contractors \u2014 Helix doesn't manage but should communicate the obligation (from T3)"
+            ]
+          }
+        },
+        {
+          "overall_recall": 0.9,
+          "recall_actions": 1.0,
+          "recall_questions": 0.5,
+          "recall_risks": 1.0,
+          "recall_by_category": {
+            "Contract Templates": 1.0,
+            "Banking & Payments": 1.0,
+            "Compliance": 0.75,
+            "Approvals & Routing": 1.0,
+            "Equity & Cap Table": 1.0
+          },
+          "n_covered": 9,
+          "n_missing": 1,
+          "n_total_items": 10,
+          "tokens_in": 2598,
+          "tokens_out": 1472,
+          "cost_usd": 0.029875000000000002,
+          "latency_s": 35.365,
+          "playbook_chars_in_context": 2439,
+          "sections_in_context": 6,
+          "router_sections_chosen": [
+            "Approvals & Routing",
+            "Equity & Cap Table",
+            "Contract Templates",
+            "Compliance",
+            "Vendor & Customer History",
+            "Banking & Payments"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 1.0,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": null,
+          "hyde_hypothetical_preview": null,
+          "seed": 1,
+          "plan": {
+            "actions": [
+              "Use IC agreement template v2.1 (international version) for both engineers \u2014 this is mandatory for international contractor engagements and includes required W-8BEN-E provisions and the 30-day notice clause; do not substitute MSA v3.2 or any domestic template",
+              "Have Priya (tech lead) review both engineers' backgrounds and complete internal technical vetting before any contract is signed \u2014 this step is a hard prerequisite to contract execution",
+              "Confirm with Marcus that he approves both engagements: each engineer is $9K/month \u00d7 6 months = $54K total per engineer ($108K combined), which far exceeds the $5K spend threshold requiring CEO approval before payment is processed; obtain written approval from Marcus before any payment is issued",
+              "Ensure both IC agreements v2.1 explicitly exclude equity for both engineers \u2014 6-month engagements are at the boundary of the sub-6-month equity exclusion policy; since the policy excludes contractors engaged for fewer than 6 months, confirm with Marcus and legal whether a exactly-6-month engagement qualifies for equity or is excluded, and document the decision clearly in both contracts",
+              "Route all payments for both engineers through Wise (not Mercury) \u2014 Mercury was deprecated for international transfers in Q2 2024; set up Wise payment profiles for both engineers prior to first disbursement",
+              "Collect W-8BEN-E forms from both engineers before processing any payments, as required by the IC agreement v2.1 international template",
+              "Initiate onboarding checklist for both engineers: collect full legal names, Indian bank/Wise account details, tax identification, and any required KYC documentation for Wise transfers",
+              "Confirm with Priya the correct CS ownership tier is not applicable here (these are contractors, not customers), but ensure Priya is looped in as tech lead for vetting and ongoing oversight"
+            ],
+            "questions": [
+              "Marcus has been flagged as required approver for spend \u2014 has he formally confirmed written approval for both $54K engagements (total $108K) before contracts are signed and payments begin?",
+              "Are these exactly 6-month engagements \u2014 and should they be treated as eligible or ineligible for equity under Helix's sub-6-month exclusion policy? Legal/Marcus should clarify whether 'fewer than 6 months' means the 6-month mark is included or excluded",
+              "Will either engineer access confidential Helix research or IP during their engagement? If so, additional IP/confidentiality provisions may need to be incorporated into the IC v2.1 agreements",
+              "Do either of the engineers hold positions at other biotechs or companies that could create IP ownership conflicts or require non-compete disclosures?",
+              "Has Priya been briefed and is she available to complete technical vetting for both candidates promptly, given the request to onboard quickly?",
+              "Are both engineers incorporated entities (requiring W-8BEN-E for a corporation/partnership) or individuals (requiring W-8BEN)? This affects which IRS withholding form is collected and should be clarified with legal/finance",
+              "What is the intended payment cadence (monthly, bi-weekly)? This affects Wise payment scheduling setup"
+            ],
+            "risks": [
+              "Skipping or rushing Priya's technical vetting to meet speed-of-hire pressure would violate Helix's internal policy \u2014 contracts must not be signed until vetting is complete, even if Marcus is pushing for quick onboarding",
+              "Paying either engineer before obtaining Marcus's written spend approval (required for any spend over $5K) would be a compliance violation \u2014 the $9K first payment alone triggers this threshold",
+              "Using the wrong contract template (e.g., domestic IC or MSA v3.2) for these Indian engineers would violate Helix legal requirements and omit mandatory W-8BEN-E and 30-day notice provisions",
+              "If the equity eligibility question for exactly-6-month engagements is not resolved in writing before contracts are signed, there is risk of a cap table dispute similar to the 2023 cleanup incident \u2014 ambiguity must be resolved before execution",
+              "Using Mercury instead of Wise for payments would result in excessive fees and is contrary to Helix policy since Q2 2024 \u2014 ensure finance and whoever initiates payments is aware",
+              "Failure to collect W-8BEN-E forms before payment could create US tax withholding liability for Helix on payments to foreign contractors",
+              "If either engineer has conflicting positions at other biotechs and this is not disclosed and documented, Helix faces potential IP ownership or misappropriation risk on work product produced during the engagement"
+            ]
+          },
+          "judgment": {
+            "n_covered": 9,
+            "n_missing": 1,
+            "missing": [
+              "Will the contractors need GitHub or customer-data access? If yes, BAA + security training required (from T3)"
+            ]
+          }
+        },
+        {
+          "overall_recall": 0.9,
+          "recall_actions": 1.0,
+          "recall_questions": 0.5,
+          "recall_risks": 1.0,
+          "recall_by_category": {
+            "Contract Templates": 1.0,
+            "Banking & Payments": 1.0,
+            "Compliance": 0.75,
+            "Approvals & Routing": 1.0,
+            "Equity & Cap Table": 1.0
+          },
+          "n_covered": 9,
+          "n_missing": 1,
+          "n_total_items": 10,
+          "tokens_in": 2722,
+          "tokens_out": 1581,
+          "cost_usd": 0.031882,
+          "latency_s": 34.917,
+          "playbook_chars_in_context": 2439,
+          "sections_in_context": 6,
+          "router_sections_chosen": [
+            "Approvals & Routing",
+            "Equity & Cap Table",
+            "Contract Templates",
+            "Compliance",
+            "Vendor & Customer History",
+            "Banking & Payments"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 1.0,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": null,
+          "hyde_hypothetical_preview": null,
+          "seed": 2,
+          "plan": {
+            "actions": [
+              "Use IC agreement template v2.1 (international version) for both engineers \u2014 this is mandatory for international contractor engagements and includes required W-8BEN-E provisions and the 30-day notice clause required by Helix legal; do NOT use MSA v3.2 or any domestic template",
+              "Have Priya (tech lead) review both engineers' backgrounds and complete internal technical vetting BEFORE any contract is signed \u2014 this is a required step and cannot be skipped for speed",
+              "Confirm equity treatment in both contracts: since engagements are exactly 6 months, verify with Marcus whether the 6-month threshold is inclusive or exclusive; if under 6 months the policy strictly excludes equity, so clarify the boundary for exactly 6-month terms and document Marcus's ruling",
+              "Obtain Marcus (CEO) approval before any payment is processed \u2014 each engineer is $9K/month, which exceeds the $5K spend threshold; this applies to every monthly payment, not just the first",
+              "Route all payments for both engineers through Wise (not Mercury) \u2014 Mercury was replaced for international transfers in Q2 2024; ensure Wise accounts/payee details are collected during onboarding",
+              "Collect W-8BEN-E forms from both engineers as required by the IC v2.1 international template before first payment",
+              "Assign correct CS ownership: total per-engineer contract value is $54K over 6 months, which falls in the $25K\u2013$100K ARR tier \u2014 assign Daniel as CS owner for each engagement",
+              "Flag both engineers for potential 1099 review: if either is US-tax-resident or paid $600+ in a US-reportable context, flag for 1099-NEC; for India-based contractors with W-8BEN-E on file, confirm with finance/legal whether 1099-NEC obligation applies or is waived by treaty",
+              "Conduct misclassification review per 2023 precedent \u2014 confirm both engineers meet true independent-contractor status criteria before finalizing classification",
+              "Prepare onboarding checklist for both engineers including: signed IC v2.1, W-8BEN-E, Wise payment details, IP/confidentiality provisions (confirm whether they will access confidential research, which may trigger additional addendum obligations)"
+            ],
+            "questions": [
+              "Does the 6-month equity exclusion policy treat exactly 6-month engagements as included or excluded from equity eligibility? Marcus should clarify and confirm in writing given the engagement term lands exactly on the threshold",
+              "Will either engineer access confidential Helix research or IP? If yes, determine whether an IP/confidentiality addendum is required (this is referenced in the SAB context but should be evaluated for contractor engagements as well)",
+              "Has Priya confirmed availability to conduct technical vetting for both engineers promptly, given the request to move quickly? What is her expected turnaround?",
+              "Are both engineers incorporated entities (requiring W-8BEN-E as a company) or individuals (requiring W-8BEN)? IC v2.1 includes W-8BEN-E provisions \u2014 confirm entity structure for each",
+              "Does Marcus have Wise already set up for Indian contractor payments, or do new payee profiles need to be created for both engineers? Are there any INR/USD conversion considerations?",
+              "What is the intended start date, and is there sufficient lead time for Priya's vetting and Marcus's approval before contracts are signed and first payments are due?",
+              "Are there any existing non-compete or exclusivity obligations for either engineer with other biotechs or employers that need to be disclosed before engagement?"
+            ],
+            "risks": [
+              "Speed pressure ('get them set up quickly') could cause the team to skip or rush Priya's mandatory technical vetting \u2014 this must not be bypassed; contracts cannot be signed until vetting is complete",
+              "Skipping or delaying Marcus's spend approval for payments exceeding $5K would violate Helix's approval policy \u2014 each $9K monthly payment requires pre-approval; set up a recurring approval workflow rather than ad-hoc requests",
+              "Using the wrong contract template (e.g., domestic IC or MSA v3.2) for international contractors would create legal exposure and violate Helix legal requirements \u2014 enforce use of IC v2.1 international version",
+              "If equity is inadvertently included in contracts for sub-6-month (or ambiguously 6-month) engagements, it could trigger cap table issues similar to the 2023 cleanup \u2014 must be resolved before contract execution",
+              "Paying through Mercury instead of Wise for international transfers would result in excessive fees and violates current Helix policy \u2014 ensure finance team is briefed on the Wise-only rule",
+              "Misclassification risk: if either engineer works in a manner resembling an employee (set hours, exclusive engagement, direct supervision), the 2023 misclassification precedent requires this be reviewed before finalizing contractor status",
+              "If W-8BEN-E forms are not collected before payment, Helix may face US withholding tax obligations on payments to foreign contractors \u2014 do not process first payment without forms on file"
+            ]
+          },
+          "judgment": {
+            "n_covered": 9,
+            "n_missing": 1,
+            "missing": [
+              "Will the contractors need GitHub or customer-data access? If yes, BAA + security training required (from T3)"
+            ]
+          }
+        }
+      ],
+      "warm_rag_hyde": [
+        {
+          "overall_recall": 0.8,
+          "recall_actions": 1.0,
+          "recall_questions": 0.5,
+          "recall_risks": 0.5,
+          "recall_by_category": {
+            "Contract Templates": 1.0,
+            "Banking & Payments": 1.0,
+            "Compliance": 0.5,
+            "Approvals & Routing": 1.0,
+            "Equity & Cap Table": 1.0
+          },
+          "n_covered": 8,
+          "n_missing": 2,
+          "n_total_items": 10,
+          "tokens_in": 2671,
+          "tokens_out": 1824,
+          "cost_usd": 0.031002999999999996,
+          "latency_s": 34.51473897743225,
+          "playbook_chars_in_context": 2182,
+          "sections_in_context": 5,
+          "router_sections_chosen": [
+            "Approvals & Routing",
+            "Contract Templates",
+            "Equity & Cap Table",
+            "Vendor & Customer History",
+            "Banking & Payments"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 0.8,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": "claude-haiku-4-5",
+          "hyde_hypothetical_preview": "# Indian Contract Engineering Expansion \u2014 Playbook Bullets\n\n\u2022 **Vendor Onboarding & Compliance**: Route both contractors through our India payroll partner (CloudFactory or Deel India) by EOD. Provide Finance with completed W-9 equivalent (Form 15G/15H) and GST documentation. Do not proceed with offe",
+          "seed": 0,
+          "plan": {
+            "actions": [
+              "Initiate technical background review for both Indian contract engineers with Priya (tech lead) \u2014 this internal vetting step is mandatory and must be completed before any contract is signed or sent for signature",
+              "Prepare two separate IC agreement packages using IC agreement template v2.1 (international version) for each engineer \u2014 this template includes the required W-8BEN-E provisions and mandatory 30-day notice clause; do not substitute MSA v3.2 or any domestic template",
+              "Confirm with legal/Marcus that the no-equity clause is explicitly included in both agreements, as both engagements are exactly 6 months \u2014 the policy strictly excludes contractors engaged for fewer than 6 months from equity, and 6-month engagements sit at the boundary; get explicit written confirmation on whether 6 months exactly qualifies as excluded or included, and document the decision before finalizing",
+              "Route both contracts to Marcus for review and sign-off given his role as the initiating executive and the spend threshold implications",
+              "Calculate total monthly spend: 2 engineers \u00d7 $9,000/month = $18,000/month per payment cycle \u2014 each monthly payment per engineer ($9,000) exceeds the $5,000 spend threshold, so each individual monthly invoice must receive Marcus (CEO) approval before payment is processed",
+              "Set up international payment for both engineers via Wise (not Mercury) \u2014 Mercury was deprecated for international transfers in Q2 2024; configure Wise payment profiles for each contractor upon contract execution",
+              "Once contracts are signed, add both engineers to relevant onboarding systems, access provisioning, and project tracking tools as directed by Priya",
+              "Document all approvals, signed agreements, and payment setup in the appropriate Helix systems for audit trail"
+            ],
+            "questions": [
+              "Do both engineers hold any conflicting positions at other biotechs that would require non-compete disclosure? This must be surfaced before onboarding is finalized.",
+              "Will either engineer access Helix's confidential research or proprietary IP? If yes, a separate IP/confidentiality addendum is required that replaces the default v1.4 template \u2014 confirm scope of their access.",
+              "Does the 6-month engagement duration qualify these engineers as excluded from equity under the sub-6-month policy, or does exactly 6 months trigger eligibility? Marcus and legal must clarify this edge case explicitly before contracts are finalized.",
+              "Has Priya been notified and is she available to complete technical vetting for both candidates promptly given the urgency to set them up quickly?",
+              "Are the $9K/month rates already negotiated and documented, or do formal offer letters/rate confirmations still need to be issued?",
+              "What is the anticipated start date for both engineers? This affects contract effective dates, W-8BEN-E submission timelines, and Wise payment schedule setup.",
+              "Will both engineers be engaged under a single vendor entity or as two separate individual contractors? This affects how IC agreements and Wise payment profiles are structured."
+            ],
+            "risks": [
+              "Skipping or rushing Priya's technical vetting to meet speed expectations would violate Helix's mandatory pre-contract approval policy \u2014 contracts cannot be signed until vetting is complete, regardless of urgency",
+              "Using any domestic template or MSA v3.2 instead of IC agreement v2.1 (international) would create legal exposure and violate Helix legal's requirements around W-8BEN-E and the 30-day notice clause",
+              "Each $9,000 monthly payment exceeds the $5,000 CEO approval threshold \u2014 failure to obtain Marcus's approval before each payment is processed would be a policy violation, even if Marcus initiated the engagement",
+              "The 6-month equity exclusion boundary is ambiguous: if equity is inadvertently included or excluded incorrectly in the agreements, it could create cap table issues similar to the 2023 cleanup incident that prompted the policy",
+              "Routing payments through Mercury instead of Wise would result in excessive fees and violate the Q2 2024 payment routing policy change",
+              "If confidential research access is not assessed upfront and the IP/confidentiality addendum is omitted where required, Helix faces IP protection risk with international contractors",
+              "Delays in Priya's vetting could bottleneck the entire onboarding timeline \u2014 if multiple approvals are queued sequentially (vetting \u2192 contract \u2192 CEO payment approval), the 'set up quickly' expectation may conflict with mandatory process steps"
+            ]
+          },
+          "judgment": {
+            "n_covered": 8,
+            "n_missing": 2,
+            "missing": [
+              "Will the contractors need GitHub or customer-data access? If yes, BAA + security training required (from T3)",
+              "India FEMA / RBI reporting for the contractors \u2014 Helix doesn't manage but should communicate the obligation (from T3)"
+            ]
+          }
+        },
+        {
+          "overall_recall": 0.8,
+          "recall_actions": 1.0,
+          "recall_questions": 0.5,
+          "recall_risks": 0.5,
+          "recall_by_category": {
+            "Contract Templates": 1.0,
+            "Banking & Payments": 1.0,
+            "Compliance": 0.5,
+            "Approvals & Routing": 1.0,
+            "Equity & Cap Table": 1.0
+          },
+          "n_covered": 8,
+          "n_missing": 2,
+          "n_total_items": 10,
+          "tokens_in": 2729,
+          "tokens_out": 1868,
+          "cost_usd": 0.031598,
+          "latency_s": 36.06860510635376,
+          "playbook_chars_in_context": 2332,
+          "sections_in_context": 5,
+          "router_sections_chosen": [
+            "Approvals & Routing",
+            "Contract Templates",
+            "Vendor & Customer History",
+            "Equity & Cap Table",
+            "Banking & Payments"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 0.8,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": "claude-haiku-4-5",
+          "hyde_hypothetical_preview": "# Indian Engineering Team Expansion \u2014 Contract Onboarding\n\n\u2022 **Vendor setup & compliance (Finance Lead + Legal):** Register both contractors in NetSuite as new vendors under \"India \u2014 Contract Engineering\" cost center before issuing any engagement letters. Run background checks via our India partner ",
+          "seed": 1,
+          "plan": {
+            "actions": [
+              "Initiate technical vetting by Priya for both Indian engineer candidates before any contract is signed \u2014 this is a mandatory internal step per Helix policy and must be completed prior to proceeding to contract execution",
+              "Use IC agreement template v2.1 (international version) for both engagements \u2014 this template includes the required W-8BEN-E provisions and the mandatory 30-day notice clause required by Helix legal; do not substitute MSA v3.2 or any domestic template",
+              "Since each engagement is exactly 6 months, confirm with legal and Marcus whether the sub-6-month equity exclusion applies or if these engineers are eligible for equity consideration; if engagements are strictly fewer than 6 months they are excluded, but at exactly 6 months this must be clarified and reflected accurately in the contract language",
+              "Calculate total spend per engineer: $9K/month x 6 months = $54K each, totaling $108K combined \u2014 both individual and combined contract values far exceed the $5,000 threshold, so obtain Marcus (CEO) approval before any payment is processed; note Marcus is already the requestor so document his approval formally in writing for audit trail",
+              "Collect W-8BEN-E forms from both engineers as required by the IC v2.1 international template before payment processing",
+              "Set up all international contractor payments through Wise, not Mercury \u2014 Mercury is no longer used for international transfers at Helix as of Q2 2024",
+              "Once contracts are signed, coordinate with finance to schedule payment runs via Wise aligned to the agreed payment cadence in the contracts",
+              "File executed contracts and W-8BEN-E forms in Helix's contract management system and update NetSuite vendor records for both engineers",
+              "Confirm with Priya that her technical vetting is documented and signed off before contract execution proceeds"
+            ],
+            "questions": [
+              "Has Priya been notified and is she available to complete technical vetting for both candidates promptly, given the urgency of the request?",
+              "Are the engagements exactly 6 months (eligible for equity consideration) or fewer than 6 months (excluded by policy)? The contract must reflect this accurately.",
+              "Will Marcus provide formal written CEO approval for the spend (even as the requestor) to satisfy the audit requirement for the >$5,000 spend policy?",
+              "Have both engineers been asked to provide their W-8BEN-E forms, and are they prepared to do so before contract signing?",
+              "What is the intended start date, and is there sufficient lead time to complete Priya's vetting, obtain Marcus's formal approval, and execute contracts before that date?",
+              "Are the engineers being engaged as individuals or through an entity, as this affects how the W-8BEN-E is completed and how Wise payments are structured?",
+              "What is the agreed payment schedule \u2014 monthly in arrears, upfront, or milestone-based? This needs to be specified in the IC v2.1 agreement."
+            ],
+            "risks": [
+              "Skipping or rushing Priya's technical vetting to meet speed-of-hire pressure would violate Helix's mandatory pre-contract approval process \u2014 this step cannot be bypassed even at Marcus's request",
+              "Using any template other than IC v2.1 (international) \u2014 such as a domestic IC template or MSA v3.2 \u2014 would create legal exposure by omitting W-8BEN-E provisions and the 30-day notice clause required by Helix legal",
+              "If payments are routed through Mercury instead of Wise, Helix incurs excessive international transfer fees and violates the Q2 2024 policy change \u2014 finance must be explicitly instructed to use Wise",
+              "The $5,000 spend threshold policy requires CEO approval before payment; even though Marcus initiated the request, failure to obtain documented formal approval creates an audit and compliance gap",
+              "If the contract duration is treated as fewer than 6 months (e.g., worded ambiguously), the equity exclusion clause must be included; if it is exactly or more than 6 months, omitting equity terms could create cap table issues reminiscent of the 2023 cleanup",
+              "At $9K/month per engineer, each individual monthly payment exceeds $5,000, meaning every single payment run requires CEO pre-approval \u2014 this must be operationalized in the payment workflow to avoid policy violations on recurring invoices",
+              "Misclassification risk: ensure both engineers meet the legal standard for independent contractor status under Indian and US law given the structured, recurring nature of the engagement"
+            ]
+          },
+          "judgment": {
+            "n_covered": 8,
+            "n_missing": 2,
+            "missing": [
+              "Will the contractors need GitHub or customer-data access? If yes, BAA + security training required (from T3)",
+              "India FEMA / RBI reporting for the contractors \u2014 Helix doesn't manage but should communicate the obligation (from T3)"
+            ]
+          }
+        },
+        {
+          "overall_recall": 0.8,
+          "recall_actions": 1.0,
+          "recall_questions": 0.5,
+          "recall_risks": 0.5,
+          "recall_by_category": {
+            "Contract Templates": 1.0,
+            "Banking & Payments": 1.0,
+            "Compliance": 0.5,
+            "Approvals & Routing": 1.0,
+            "Equity & Cap Table": 1.0
+          },
+          "n_covered": 8,
+          "n_missing": 2,
+          "n_total_items": 10,
+          "tokens_in": 2941,
+          "tokens_out": 2033,
+          "cost_usd": 0.034738,
+          "latency_s": 39.3190989189148,
+          "playbook_chars_in_context": 2439,
+          "sections_in_context": 6,
+          "router_sections_chosen": [
+            "Approvals & Routing",
+            "Contract Templates",
+            "Equity & Cap Table",
+            "Vendor & Customer History",
+            "Banking & Payments",
+            "Compliance"
+          ],
+          "bullets_retrieved": 10,
+          "router_section_accuracy": 1.0,
+          "planner_model": "claude-sonnet-4-6",
+          "hyde_model": "claude-haiku-4-5",
+          "hyde_hypothetical_preview": "# Indian Contract Engineering Expansion \u2014 Playbook Guidance\n\n- **Vendor Onboarding & Compliance**: Route both contracts through our approved India staffing partner (currently Upwork Pro or Deel for contractors under $15K/month). Require completion of our India Contractor Addendum v2.3 and tax compli",
+          "seed": 2,
+          "plan": {
+            "actions": [
+              "Initiate technical vetting for both Indian contract engineers with Priya (tech lead) \u2014 this internal review must be completed before any contract is signed; do not proceed to contract execution until Priya provides written sign-off on each candidate's background",
+              "Prepare two separate IC agreement template v2.1 (international version) contracts for each engineer \u2014 this template includes the required W-8BEN-E provisions and mandatory 30-day notice clause per Helix legal; do not substitute MSA v3.2 or any domestic IC template",
+              "Confirm W-8BEN-E forms are collected from both engineers prior to contract execution, as required by the international template",
+              "Explicitly include language in both contracts stating no equity is granted, consistent with Helix's strict policy excluding contractors engaged for fewer than 6 months from any equity \u2014 note that 6-month engagements sit exactly at the policy boundary, so confirm with Marcus whether 6 months is inclusive or exclusive of the equity eligibility threshold and document his ruling",
+              "Calculate total spend per engineer: $9K/month x 6 months = $54K each, totaling $108K combined \u2014 each individual engagement exceeds the $5,000 per-payment threshold, so obtain Marcus's explicit written approval before any payment is processed for either engineer",
+              "Set up both engineers for international payments via Wise (not Mercury) \u2014 Mercury was replaced for international transfers in Q2 2024; configure Wise payment profiles for each contractor before first payment date",
+              "Once contracts are signed, confirm neither engineer is US-based (both are India-based per the request), so 1099-NEC requirements do not apply; document this determination for compliance records",
+              "File Priya's technical vetting sign-off, signed contracts, W-8BEN-E forms, Marcus's spend approval, and Wise payment setup confirmations in the contractor onboarding records for both engineers"
+            ],
+            "questions": [
+              "Has Priya been notified and is she available to complete technical vetting for both candidates promptly, given the request to move quickly \u2014 and what is her expected turnaround?",
+              "Does the 6-month engagement duration make these engineers eligible or ineligible for equity under Helix's sub-6-month exclusion policy? The policy excludes 'fewer than 6 months' \u2014 Marcus should clarify whether exactly 6 months is considered within or outside the exclusion before contracts are finalized",
+              "Are the $9K/month payments to be made monthly? If so, each monthly payment of $9K individually triggers the $5K CEO approval threshold \u2014 should Marcus provide a blanket upfront approval covering all monthly payments for both engagements, or will he approve each invoice separately?",
+              "Do either of the two engineers hold conflicting positions at other biotechs that would require non-compete disclosure? This must be surfaced during onboarding per Helix vendor/advisor policy (noting this applies to advisors formally, but conflict-of-interest checks are prudent for contractors with access to Helix IP)",
+              "What level of access to confidential Helix research or IP will these engineers have? If significant IP access is involved, additional IP/confidentiality provisions should be considered and Helix legal should be consulted about whether an addendum is needed",
+              "Are the engineers being engaged as individuals or through incorporated entities? This affects W-8BEN-E form type and Wise payment setup",
+              "Has Wise already been configured for Indian rupee or USD transfers to India, or does a new Wise payment corridor need to be established?"
+            ],
+            "risks": [
+              "Skipping or rushing Priya's technical vetting before contract signing violates Helix's required approval process \u2014 proceeding without her sign-off exposes Helix to an unapproved contractor engagement and potential legal/quality risk",
+              "Using any contract template other than IC v2.1 (international) \u2014 such as the domestic IC template or MSA v3.2 \u2014 would omit legally required W-8BEN-E provisions and the 30-day notice clause mandated by Helix legal, creating contract enforceability risk",
+              "The 6-month duration sits exactly at the equity policy boundary ('fewer than 6 months' are excluded) \u2014 without Marcus's explicit clarification, there is a risk of either improperly granting equity or improperly denying it, either of which could create cap table or contractor relations issues",
+              "Each $9K monthly payment exceeds the $5K spend threshold requiring CEO approval \u2014 if payments are processed without Marcus's prior approval (even under time pressure), this violates Helix's financial controls policy",
+              "Total combined spend of $108K is significant; without upfront documented approval covering the full engagement, there is a risk of approval gaps mid-engagement if Marcus is unavailable for individual invoice approvals",
+              "Routing payments through Mercury instead of Wise would result in excessive fees and violates Helix's current banking policy \u2014 must ensure finance/ops does not default to Mercury for these transfers",
+              "If either engineer is misclassified or if their engagement structure does not support true independent-contractor status, there is a misclassification risk under Indian and/or US tax law \u2014 Helix legal should confirm IC classification is defensible for both engagements given the 2023 misclassification precedent"
+            ]
+          },
+          "judgment": {
+            "n_covered": 8,
+            "n_missing": 2,
+            "missing": [
+              "Will the contractors need GitHub or customer-data access? If yes, BAA + security training required (from T3)",
+              "India FEMA / RBI reporting for the contractors \u2014 Helix doesn't manage but should communicate the obligation (from T3)"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "aggregated": {
+    "intl_advisor": {
+      "warm_rag": {
+        "overall_recall": {
+          "mean": 0.7692307692307693,
+          "std": 0.07692307692307693,
+          "min": 0.6923076923076923,
+          "max": 0.8461538461538461,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.8095238095238095,
+          "std": 0.08247860988423221,
+          "min": 0.7142857142857143,
+          "max": 0.8571428571428571,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.6666666666666666,
+          "std": 0.0,
+          "min": 0.6666666666666666,
+          "max": 0.6666666666666666,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.7777777777777778,
+          "std": 0.1924500897298753,
+          "min": 0.6666666666666666,
+          "max": 1.0,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 10,
+          "std": 1.0,
+          "min": 9,
+          "max": 11,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 3,
+          "std": 1.0,
+          "min": 2,
+          "max": 4,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 13,
+          "std": 0.0,
+          "min": 13,
+          "max": 13,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2732.3333333333335,
+          "std": 22.94195574342635,
+          "min": 2706,
+          "max": 2748,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1643,
+          "std": 26.90724809414742,
+          "min": 1613,
+          "max": 1665,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.032843000000000004,
+          "std": 0.0004717382748940339,
+          "min": 0.032314,
+          "max": 0.03322,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 32.53933333333333,
+          "std": 3.4853310220599347,
+          "min": 30.456,
+          "max": 36.563,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2397,
+          "std": 0.0,
+          "min": 2397,
+          "max": 2397,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 6,
+          "std": 0.0,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "bullets_retrieved": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "router_section_accuracy": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Compliance": {
+            "mean": 0.4166666666666667,
+            "std": 0.28867513459481287,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Approvals & Routing": {
+            "mean": 0.8333333333333334,
+            "std": 0.28867513459481287,
+            "n": 3
+          },
+          "Equity & Cap Table": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 0.8333333333333334,
+            "std": 0.28867513459481287,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      },
+      "warm_rag_hyde": {
+        "overall_recall": {
+          "mean": 0.8461538461538461,
+          "std": 0.07692307692307693,
+          "min": 0.7692307692307693,
+          "max": 0.9230769230769231,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.9047619047619048,
+          "std": 0.08247860988423228,
+          "min": 0.8571428571428571,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.6666666666666666,
+          "std": 0.0,
+          "min": 0.6666666666666666,
+          "max": 0.6666666666666666,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.8888888888888888,
+          "std": 0.1924500897298753,
+          "min": 0.6666666666666666,
+          "max": 1.0,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 11,
+          "std": 1.0,
+          "min": 10,
+          "max": 12,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 2,
+          "std": 1.0,
+          "min": 1,
+          "max": 3,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 13,
+          "std": 0.0,
+          "min": 13,
+          "max": 13,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2935.6666666666665,
+          "std": 118.37370203441867,
+          "min": 2799,
+          "max": 3006,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 2031.6666666666667,
+          "std": 75.06219643291378,
+          "min": 1945,
+          "max": 2076,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.03515533333333334,
+          "std": 0.0017816583099273936,
+          "min": 0.033103,
+          "max": 0.036305000000000004,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 36.368524575551355,
+          "std": 1.9074973210916555,
+          "min": 34.382068845748904,
+          "max": 38.18579203605652,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2386.6666666666665,
+          "std": 11.060440015358038,
+          "min": 2375,
+          "max": 2397,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 6,
+          "std": 0.0,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "bullets_retrieved": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "router_section_accuracy": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Compliance": {
+            "mean": 0.75,
+            "std": 0.25,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Approvals & Routing": {
+            "mean": 0.5,
+            "std": 0.0,
+            "n": 3
+          },
+          "Equity & Cap Table": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      }
+    },
+    "customer_expansion": {
+      "warm_rag": {
+        "overall_recall": {
+          "mean": 0.4848484848484848,
+          "std": 0.052486388108147784,
+          "min": 0.45454545454545453,
+          "max": 0.5454545454545454,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.6666666666666666,
+          "std": 0.0,
+          "min": 0.6666666666666666,
+          "max": 0.6666666666666666,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.3333333333333333,
+          "std": 0.0,
+          "min": 0.3333333333333333,
+          "max": 0.3333333333333333,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.16666666666666666,
+          "std": 0.28867513459481287,
+          "min": 0.0,
+          "max": 0.5,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 5.333333333333333,
+          "std": 0.5773502691896257,
+          "min": 5,
+          "max": 6,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 5.666666666666667,
+          "std": 0.5773502691896257,
+          "min": 5,
+          "max": 6,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 11,
+          "std": 0.0,
+          "min": 11,
+          "max": 11,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2463,
+          "std": 13.114877048604,
+          "min": 2451,
+          "max": 2477,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1428.3333333333333,
+          "std": 14.011899704655802,
+          "min": 1414,
+          "max": 1442,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.028815,
+          "std": 0.0002490240952197206,
+          "min": 0.028564,
+          "max": 0.029062,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 27.346666666666668,
+          "std": 0.9000046296177225,
+          "min": 26.445,
+          "max": 28.245,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2148,
+          "std": 0.0,
+          "min": 2148,
+          "max": 2148,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 4,
+          "std": 0.0,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "bullets_retrieved": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "router_section_accuracy": {
+          "mean": 0.6,
+          "std": 0.0,
+          "min": 0.6,
+          "max": 0.6,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Compliance": {
+            "mean": 0.4444444444444444,
+            "std": 0.19245008972987523,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 0.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Approvals & Routing": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Vendor & Customer History": {
+            "mean": 0.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      },
+      "warm_rag_hyde": {
+        "overall_recall": {
+          "mean": 0.5454545454545454,
+          "std": 0.09090909090909091,
+          "min": 0.45454545454545453,
+          "max": 0.6363636363636364,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.6666666666666666,
+          "std": 0.0,
+          "min": 0.6666666666666666,
+          "max": 0.6666666666666666,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.5555555555555556,
+          "std": 0.19245008972987523,
+          "min": 0.3333333333333333,
+          "max": 0.6666666666666666,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.16666666666666666,
+          "std": 0.28867513459481287,
+          "min": 0.0,
+          "max": 0.5,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 6,
+          "std": 1.0,
+          "min": 5,
+          "max": 7,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 5,
+          "std": 1.0,
+          "min": 4,
+          "max": 6,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 11,
+          "std": 0.0,
+          "min": 11,
+          "max": 11,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2664.6666666666665,
+          "std": 96.03298044595583,
+          "min": 2575,
+          "max": 2766,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1797,
+          "std": 133.82077566656082,
+          "min": 1643,
+          "max": 1885,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.03076433333333333,
+          "std": 0.0016894227811099691,
+          "min": 0.028990999999999996,
+          "max": 0.032355,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 37.34937549527486,
+          "std": 4.209313619983501,
+          "min": 34.11687687301636,
+          "max": 42.10911580276489,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2218.6666666666665,
+          "std": 67.3003219407852,
+          "min": 2148,
+          "max": 2282,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 4,
+          "std": 0.0,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "bullets_retrieved": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "router_section_accuracy": {
+          "mean": 0.6,
+          "std": 0.0,
+          "min": 0.6,
+          "max": 0.6,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Compliance": {
+            "mean": 0.3333333333333333,
+            "std": 0.0,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 0.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Approvals & Routing": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Vendor & Customer History": {
+            "mean": 0.3333333333333333,
+            "std": 0.3333333333333333,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      }
+    },
+    "intl_contractor_batch": {
+      "warm_rag": {
+        "overall_recall": {
+          "mean": 0.8666666666666667,
+          "std": 0.05773502691896256,
+          "min": 0.8,
+          "max": 0.9,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.5,
+          "std": 0.0,
+          "min": 0.5,
+          "max": 0.5,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.8333333333333334,
+          "std": 0.28867513459481287,
+          "min": 0.5,
+          "max": 1.0,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 8.666666666666666,
+          "std": 0.5773502691896257,
+          "min": 8,
+          "max": 9,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 1.3333333333333333,
+          "std": 0.5773502691896257,
+          "min": 1,
+          "max": 2,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2665,
+          "std": 62.601916903558156,
+          "min": 2598,
+          "max": 2722,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1524.3333333333333,
+          "std": 54.62905209989766,
+          "min": 1472,
+          "max": 1581,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.030861,
+          "std": 0.0010039576684302972,
+          "min": 0.029875000000000002,
+          "max": 0.031882,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 33.871,
+          "std": 2.2110802789586828,
+          "min": 31.331,
+          "max": 35.365,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2439,
+          "std": 0.0,
+          "min": 2439,
+          "max": 2439,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 6,
+          "std": 0.0,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "bullets_retrieved": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "router_section_accuracy": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Compliance": {
+            "mean": 0.6666666666666666,
+            "std": 0.14433756729740643,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Approvals & Routing": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Equity & Cap Table": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      },
+      "warm_rag_hyde": {
+        "overall_recall": {
+          "mean": 0.8,
+          "std": 0.0,
+          "min": 0.8,
+          "max": 0.8,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.5,
+          "std": 0.0,
+          "min": 0.5,
+          "max": 0.5,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.5,
+          "std": 0.0,
+          "min": 0.5,
+          "max": 0.5,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 8,
+          "std": 0.0,
+          "min": 8,
+          "max": 8,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 2,
+          "std": 0.0,
+          "min": 2,
+          "max": 2,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2780.3333333333335,
+          "std": 142.13139460841623,
+          "min": 2671,
+          "max": 2941,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1908.3333333333333,
+          "std": 110.18318080965594,
+          "min": 1824,
+          "max": 2033,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.032446333333333334,
+          "std": 0.002006815470673209,
+          "min": 0.031002999999999996,
+          "max": 0.034738,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 36.634147667566936,
+          "std": 2.451600987770688,
+          "min": 34.51473897743225,
+          "max": 39.3190989189148,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2317.6666666666665,
+          "std": 129.0981538726768,
+          "min": 2182,
+          "max": 2439,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 5.333333333333333,
+          "std": 0.5773502691896257,
+          "min": 5,
+          "max": 6,
+          "n": 3
+        },
+        "bullets_retrieved": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "router_section_accuracy": {
+          "mean": 0.8666666666666667,
+          "std": 0.11547005383792512,
+          "min": 0.8,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Compliance": {
+            "mean": 0.5,
+            "std": 0.0,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Approvals & Routing": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Equity & Cap Table": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      }
+    }
+  },
+  "totals": {
+    "wall_clock_s": 621.8,
+    "total_cost_usd": 0.5727,
+    "total_runs": 18
+  }
+}

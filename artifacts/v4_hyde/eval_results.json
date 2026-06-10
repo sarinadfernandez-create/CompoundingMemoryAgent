@@ -1,0 +1,2391 @@
+{
+  "iter": "v4_hyde",
+  "config": {
+    "models": {
+      "grader": "claude-sonnet-4-6",
+      "router": "claude-haiku-4-5",
+      "hyde": "claude-haiku-4-5"
+    },
+    "temperature_planner": 0.7,
+    "temperature_grader": 0.0,
+    "n_seeds": 3,
+    "configs": [
+      "cold",
+      "warm_full",
+      "warm_routed",
+      "warm_rag",
+      "warm_rag_cascade",
+      "warm_rag_hyde"
+    ],
+    "test_cases": [
+      "intl_advisor",
+      "customer_expansion",
+      "intl_contractor_batch"
+    ],
+    "top_k_rag": 10,
+    "embed_model": "text-embedding-3-small"
+  },
+  "playbook_stats": {
+    "sections": 6,
+    "bullets": 20,
+    "chars": 4219
+  },
+  "_merged_from": {
+    "five_config_sweep": "eval_results_5configs.json (cold/warm_full/warm_routed/warm_rag/warm_rag_cascade)",
+    "hyde_diagnostic": "eval_results_hyde_diagnostic.json (warm_rag/warm_rag_hyde, same seeds/playbook)",
+    "note": "Merged from two real eval runs sharing identical playbook + seed setup. No data regenerated."
+  },
+  "aggregated": {
+    "intl_advisor": {
+      "cold": {
+        "overall_recall": {
+          "mean": 0.6153846153846154,
+          "std": 0.0,
+          "min": 0.6153846153846154,
+          "max": 0.6153846153846154,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.5238095238095237,
+          "std": 0.08247860988423225,
+          "min": 0.42857142857142855,
+          "max": 0.5714285714285714,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.6666666666666666,
+          "std": 0.0,
+          "min": 0.6666666666666666,
+          "max": 0.6666666666666666,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.7777777777777778,
+          "std": 0.1924500897298753,
+          "min": 0.6666666666666666,
+          "max": 1.0,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 8,
+          "std": 0.0,
+          "min": 8,
+          "max": 8,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 5,
+          "std": 0.0,
+          "min": 5,
+          "max": 5,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 13,
+          "std": 0.0,
+          "min": 13,
+          "max": 13,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 1982,
+          "std": 16.09347693943108,
+          "min": 1967,
+          "max": 1999,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1492.3333333333333,
+          "std": 23.288051299611425,
+          "min": 1476,
+          "max": 1519,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.028331000000000002,
+          "std": 0.0003536608544919836,
+          "min": 0.028041,
+          "max": 0.028725,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 33.003,
+          "std": 4.899048479041617,
+          "min": 28.459000000000003,
+          "max": 38.193,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 0,
+          "std": 0.0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 0,
+          "std": 0.0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "bullets_retrieved": null,
+        "router_section_accuracy": null,
+        "recall_by_category": {
+          "Approvals & Routing": {
+            "mean": 0.5,
+            "std": 0.0,
+            "n": 3
+          },
+          "Compliance": {
+            "mean": 0.9166666666666666,
+            "std": 0.14433756729740643,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 0.5,
+            "std": 0.0,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 0.6666666666666666,
+            "std": 0.0,
+            "n": 3
+          },
+          "Equity & Cap Table": {
+            "mean": 0.16666666666666666,
+            "std": 0.28867513459481287,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      },
+      "warm_full": {
+        "overall_recall": {
+          "mean": 0.8974358974358975,
+          "std": 0.0888231183368655,
+          "min": 0.8461538461538461,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.7777777777777778,
+          "std": 0.1924500897298753,
+          "min": 0.6666666666666666,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.7777777777777778,
+          "std": 0.1924500897298753,
+          "min": 0.6666666666666666,
+          "max": 1.0,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 11.666666666666666,
+          "std": 1.1547005383792515,
+          "min": 11,
+          "max": 13,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 1.3333333333333333,
+          "std": 1.1547005383792515,
+          "min": 0,
+          "max": 2,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 13,
+          "std": 0.0,
+          "min": 13,
+          "max": 13,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 3369.6666666666665,
+          "std": 107.8718375357226,
+          "min": 3301,
+          "max": 3494,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1848,
+          "std": 92.67685795278129,
+          "min": 1793,
+          "max": 1955,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.037828999999999995,
+          "std": 0.0017135130580185243,
+          "min": 0.036798,
+          "max": 0.039806999999999995,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 39.52466666666667,
+          "std": 2.563535514349922,
+          "min": 36.569,
+          "max": 41.143,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 4219,
+          "std": 0.0,
+          "min": 4219,
+          "max": 4219,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 6,
+          "std": 0.0,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "bullets_retrieved": null,
+        "router_section_accuracy": null,
+        "recall_by_category": {
+          "Approvals & Routing": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Compliance": {
+            "mean": 0.6666666666666666,
+            "std": 0.28867513459481287,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Equity & Cap Table": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      },
+      "warm_routed": {
+        "overall_recall": {
+          "mean": 0.7435897435897436,
+          "std": 0.16012815380508716,
+          "min": 0.6153846153846154,
+          "max": 0.9230769230769231,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.6666666666666666,
+          "std": 0.1649572197684645,
+          "min": 0.5714285714285714,
+          "max": 0.8571428571428571,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.8888888888888888,
+          "std": 0.1924500897298753,
+          "min": 0.6666666666666666,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.7777777777777778,
+          "std": 0.1924500897298753,
+          "min": 0.6666666666666666,
+          "max": 1.0,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 9.666666666666666,
+          "std": 2.0816659994661326,
+          "min": 8,
+          "max": 12,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 3.3333333333333335,
+          "std": 2.0816659994661326,
+          "min": 1,
+          "max": 5,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 13,
+          "std": 0.0,
+          "min": 13,
+          "max": 13,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 3095,
+          "std": 36.75595189897821,
+          "min": 3065,
+          "max": 3136,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1757.3333333333333,
+          "std": 45.36885862938733,
+          "min": 1709,
+          "max": 1799,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.034885,
+          "std": 0.0007836510703112716,
+          "min": 0.034069999999999996,
+          "max": 0.035633,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 35.87033333333333,
+          "std": 6.004393419266706,
+          "min": 31.83,
+          "max": 42.769999999999996,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2823,
+          "std": 0.0,
+          "min": 2823,
+          "max": 2823,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 4,
+          "std": 0.0,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "bullets_retrieved": null,
+        "router_section_accuracy": {
+          "mean": 0.6,
+          "std": 0.0,
+          "min": 0.6,
+          "max": 0.6,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Approvals & Routing": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Compliance": {
+            "mean": 0.75,
+            "std": 0.25,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 0.6666666666666666,
+            "std": 0.28867513459481287,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Equity & Cap Table": {
+            "mean": 0.16666666666666666,
+            "std": 0.28867513459481287,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      },
+      "warm_rag": {
+        "overall_recall": {
+          "mean": 0.7692307692307693,
+          "std": 0.07692307692307693,
+          "min": 0.6923076923076923,
+          "max": 0.8461538461538461,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.8095238095238095,
+          "std": 0.08247860988423221,
+          "min": 0.7142857142857143,
+          "max": 0.8571428571428571,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.6666666666666666,
+          "std": 0.0,
+          "min": 0.6666666666666666,
+          "max": 0.6666666666666666,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.7777777777777778,
+          "std": 0.1924500897298753,
+          "min": 0.6666666666666666,
+          "max": 1.0,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 10,
+          "std": 1.0,
+          "min": 9,
+          "max": 11,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 3,
+          "std": 1.0,
+          "min": 2,
+          "max": 4,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 13,
+          "std": 0.0,
+          "min": 13,
+          "max": 13,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2732.3333333333335,
+          "std": 22.94195574342635,
+          "min": 2706,
+          "max": 2748,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1643,
+          "std": 26.90724809414742,
+          "min": 1613,
+          "max": 1665,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.032843000000000004,
+          "std": 0.0004717382748940339,
+          "min": 0.032314,
+          "max": 0.03322,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 32.53933333333333,
+          "std": 3.4853310220599347,
+          "min": 30.456,
+          "max": 36.563,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2397,
+          "std": 0.0,
+          "min": 2397,
+          "max": 2397,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 6,
+          "std": 0.0,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "bullets_retrieved": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "router_section_accuracy": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Compliance": {
+            "mean": 0.4166666666666667,
+            "std": 0.28867513459481287,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Approvals & Routing": {
+            "mean": 0.8333333333333334,
+            "std": 0.28867513459481287,
+            "n": 3
+          },
+          "Equity & Cap Table": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 0.8333333333333334,
+            "std": 0.28867513459481287,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      },
+      "warm_rag_cascade": {
+        "overall_recall": {
+          "mean": 0.7234432234432234,
+          "std": 0.053928321847382624,
+          "min": 0.6923076923076923,
+          "max": 0.7857142857142857,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.8095238095238095,
+          "std": 0.08247860988423221,
+          "min": 0.7142857142857143,
+          "max": 0.8571428571428571,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.7777777777777778,
+          "std": 0.1924500897298753,
+          "min": 0.6666666666666666,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.4722222222222222,
+          "std": 0.2405626121623441,
+          "min": 0.3333333333333333,
+          "max": 0.75,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 9.666666666666666,
+          "std": 1.1547005383792515,
+          "min": 9,
+          "max": 11,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 3.6666666666666665,
+          "std": 0.5773502691896257,
+          "min": 3,
+          "max": 4,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 13.333333333333334,
+          "std": 0.5773502691896257,
+          "min": 13,
+          "max": 14,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2382.6666666666665,
+          "std": 3.2145502536643185,
+          "min": 2379,
+          "max": 2385,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1418.6666666666667,
+          "std": 28.112867753634337,
+          "min": 1400,
+          "max": 1451,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.018611,
+          "std": 0.000415382955837141,
+          "min": 0.018349999999999998,
+          "max": 0.01909,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 18.586,
+          "std": 3.811427422895522,
+          "min": 14.216,
+          "max": 21.223,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2397,
+          "std": 0.0,
+          "min": 2397,
+          "max": 2397,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 6,
+          "std": 0.0,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "bullets_retrieved": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "router_section_accuracy": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Approvals & Routing": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Compliance": {
+            "mean": 0.5833333333333334,
+            "std": 0.14433756729740643,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 0.3333333333333333,
+            "std": 0.0,
+            "n": 3
+          },
+          "Equity & Cap Table": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-haiku-4-5"
+      },
+      "warm_rag_hyde": {
+        "overall_recall": {
+          "mean": 0.8461538461538461,
+          "std": 0.07692307692307693,
+          "min": 0.7692307692307693,
+          "max": 0.9230769230769231,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.9047619047619048,
+          "std": 0.08247860988423228,
+          "min": 0.8571428571428571,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.6666666666666666,
+          "std": 0.0,
+          "min": 0.6666666666666666,
+          "max": 0.6666666666666666,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.8888888888888888,
+          "std": 0.1924500897298753,
+          "min": 0.6666666666666666,
+          "max": 1.0,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 11,
+          "std": 1.0,
+          "min": 10,
+          "max": 12,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 2,
+          "std": 1.0,
+          "min": 1,
+          "max": 3,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 13,
+          "std": 0.0,
+          "min": 13,
+          "max": 13,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2935.6666666666665,
+          "std": 118.37370203441867,
+          "min": 2799,
+          "max": 3006,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 2031.6666666666667,
+          "std": 75.06219643291378,
+          "min": 1945,
+          "max": 2076,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.03515533333333334,
+          "std": 0.0017816583099273936,
+          "min": 0.033103,
+          "max": 0.036305000000000004,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 36.368524575551355,
+          "std": 1.9074973210916555,
+          "min": 34.382068845748904,
+          "max": 38.18579203605652,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2386.6666666666665,
+          "std": 11.060440015358038,
+          "min": 2375,
+          "max": 2397,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 6,
+          "std": 0.0,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "bullets_retrieved": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "router_section_accuracy": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Compliance": {
+            "mean": 0.75,
+            "std": 0.25,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Approvals & Routing": {
+            "mean": 0.5,
+            "std": 0.0,
+            "n": 3
+          },
+          "Equity & Cap Table": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      }
+    },
+    "customer_expansion": {
+      "cold": {
+        "overall_recall": {
+          "mean": 0.3939393939393939,
+          "std": 0.13886593015017695,
+          "min": 0.2727272727272727,
+          "max": 0.5454545454545454,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.4444444444444444,
+          "std": 0.09622504486493764,
+          "min": 0.3333333333333333,
+          "max": 0.5,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.4444444444444444,
+          "std": 0.19245008972987523,
+          "min": 0.3333333333333333,
+          "max": 0.6666666666666666,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.16666666666666666,
+          "std": 0.28867513459481287,
+          "min": 0.0,
+          "max": 0.5,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 4.333333333333333,
+          "std": 1.5275252316519468,
+          "min": 3,
+          "max": 6,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 6.666666666666667,
+          "std": 1.5275252316519468,
+          "min": 5,
+          "max": 8,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 11,
+          "std": 0.0,
+          "min": 11,
+          "max": 11,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 1859,
+          "std": 61.26173356998641,
+          "min": 1790,
+          "max": 1907,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1355.3333333333333,
+          "std": 57.45723047044065,
+          "min": 1290,
+          "max": 1398,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.025907,
+          "std": 0.0010454745334057644,
+          "min": 0.02472,
+          "max": 0.026691,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 27.884333333333334,
+          "std": 1.2198747203435836,
+          "min": 26.692,
+          "max": 29.130000000000003,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 0,
+          "std": 0.0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 0,
+          "std": 0.0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "bullets_retrieved": null,
+        "router_section_accuracy": null,
+        "recall_by_category": {
+          "Approvals & Routing": {
+            "mean": 0.8333333333333334,
+            "std": 0.28867513459481287,
+            "n": 3
+          },
+          "Vendor & Customer History": {
+            "mean": 0.2222222222222222,
+            "std": 0.38490017945975047,
+            "n": 3
+          },
+          "Compliance": {
+            "mean": 0.3333333333333333,
+            "std": 0.0,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 0.5,
+            "std": 0.0,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 0.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      },
+      "warm_full": {
+        "overall_recall": {
+          "mean": 0.787878787878788,
+          "std": 0.05248638810814781,
+          "min": 0.7272727272727273,
+          "max": 0.8181818181818182,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.8333333333333334,
+          "std": 0.0,
+          "min": 0.8333333333333334,
+          "max": 0.8333333333333334,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.6666666666666666,
+          "std": 0.0,
+          "min": 0.6666666666666666,
+          "max": 0.6666666666666666,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.8333333333333334,
+          "std": 0.28867513459481287,
+          "min": 0.5,
+          "max": 1.0,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 8.666666666666666,
+          "std": 0.5773502691896257,
+          "min": 8,
+          "max": 9,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 2.3333333333333335,
+          "std": 0.5773502691896257,
+          "min": 2,
+          "max": 3,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 11,
+          "std": 0.0,
+          "min": 11,
+          "max": 11,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 3095,
+          "std": 55.054518434003214,
+          "min": 3034,
+          "max": 3141,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1575.6666666666667,
+          "std": 55.08478313775351,
+          "min": 1514,
+          "max": 1620,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.032920000000000005,
+          "std": 0.000991336976007656,
+          "min": 0.031812,
+          "max": 0.033723,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 32.84,
+          "std": 3.742403505770058,
+          "min": 30.392,
+          "max": 37.148,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 4219,
+          "std": 0.0,
+          "min": 4219,
+          "max": 4219,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 6,
+          "std": 0.0,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "bullets_retrieved": null,
+        "router_section_accuracy": null,
+        "recall_by_category": {
+          "Approvals & Routing": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Vendor & Customer History": {
+            "mean": 0.7777777777777778,
+            "std": 0.3849001794597505,
+            "n": 3
+          },
+          "Compliance": {
+            "mean": 0.6666666666666666,
+            "std": 0.0,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 0.3333333333333333,
+            "std": 0.5773502691896257,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      },
+      "warm_routed": {
+        "overall_recall": {
+          "mean": 0.5151515151515151,
+          "std": 0.1049727762162956,
+          "min": 0.45454545454545453,
+          "max": 0.6363636363636364,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.611111111111111,
+          "std": 0.0962250448649376,
+          "min": 0.5,
+          "max": 0.6666666666666666,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.5555555555555556,
+          "std": 0.19245008972987523,
+          "min": 0.3333333333333333,
+          "max": 0.6666666666666666,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.16666666666666666,
+          "std": 0.28867513459481287,
+          "min": 0.0,
+          "max": 0.5,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 5.666666666666667,
+          "std": 1.1547005383792515,
+          "min": 5,
+          "max": 7,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 5.333333333333333,
+          "std": 1.1547005383792515,
+          "min": 4,
+          "max": 6,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 11,
+          "std": 0.0,
+          "min": 11,
+          "max": 11,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2820,
+          "std": 60.024994793835674,
+          "min": 2761,
+          "max": 2881,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1521,
+          "std": 61.220911460055866,
+          "min": 1463,
+          "max": 1585,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.030576999999999997,
+          "std": 0.0010981516288746291,
+          "min": 0.029529999999999997,
+          "max": 0.03172,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 34.34433333333333,
+          "std": 3.733791950997448,
+          "min": 30.034,
+          "max": 36.583,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2532,
+          "std": 0.0,
+          "min": 2532,
+          "max": 2532,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 3,
+          "std": 0.0,
+          "min": 3,
+          "max": 3,
+          "n": 3
+        },
+        "bullets_retrieved": null,
+        "router_section_accuracy": {
+          "mean": 0.6,
+          "std": 0.0,
+          "min": 0.6,
+          "max": 0.6,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Approvals & Routing": {
+            "mean": 0.8333333333333334,
+            "std": 0.28867513459481287,
+            "n": 3
+          },
+          "Vendor & Customer History": {
+            "mean": 0.3333333333333333,
+            "std": 0.3333333333333333,
+            "n": 3
+          },
+          "Compliance": {
+            "mean": 0.3333333333333333,
+            "std": 0.0,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 0.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      },
+      "warm_rag": {
+        "overall_recall": {
+          "mean": 0.4848484848484848,
+          "std": 0.052486388108147784,
+          "min": 0.45454545454545453,
+          "max": 0.5454545454545454,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.6666666666666666,
+          "std": 0.0,
+          "min": 0.6666666666666666,
+          "max": 0.6666666666666666,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.3333333333333333,
+          "std": 0.0,
+          "min": 0.3333333333333333,
+          "max": 0.3333333333333333,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.16666666666666666,
+          "std": 0.28867513459481287,
+          "min": 0.0,
+          "max": 0.5,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 5.333333333333333,
+          "std": 0.5773502691896257,
+          "min": 5,
+          "max": 6,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 5.666666666666667,
+          "std": 0.5773502691896257,
+          "min": 5,
+          "max": 6,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 11,
+          "std": 0.0,
+          "min": 11,
+          "max": 11,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2463,
+          "std": 13.114877048604,
+          "min": 2451,
+          "max": 2477,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1428.3333333333333,
+          "std": 14.011899704655802,
+          "min": 1414,
+          "max": 1442,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.028815,
+          "std": 0.0002490240952197206,
+          "min": 0.028564,
+          "max": 0.029062,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 27.346666666666668,
+          "std": 0.9000046296177225,
+          "min": 26.445,
+          "max": 28.245,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2148,
+          "std": 0.0,
+          "min": 2148,
+          "max": 2148,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 4,
+          "std": 0.0,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "bullets_retrieved": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "router_section_accuracy": {
+          "mean": 0.6,
+          "std": 0.0,
+          "min": 0.6,
+          "max": 0.6,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Compliance": {
+            "mean": 0.4444444444444444,
+            "std": 0.19245008972987523,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 0.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Approvals & Routing": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Vendor & Customer History": {
+            "mean": 0.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      },
+      "warm_rag_cascade": {
+        "overall_recall": {
+          "mean": 0.45454545454545453,
+          "std": 0.0,
+          "min": 0.45454545454545453,
+          "max": 0.45454545454545453,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.6666666666666666,
+          "std": 0.0,
+          "min": 0.6666666666666666,
+          "max": 0.6666666666666666,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.3333333333333333,
+          "std": 0.0,
+          "min": 0.3333333333333333,
+          "max": 0.3333333333333333,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 5,
+          "std": 0.0,
+          "min": 5,
+          "max": 5,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 6,
+          "std": 0.0,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 11,
+          "std": 0.0,
+          "min": 11,
+          "max": 11,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2174.6666666666665,
+          "std": 40.079088479322145,
+          "min": 2141,
+          "max": 2219,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1219.3333333333333,
+          "std": 45.6544995956952,
+          "min": 1176,
+          "max": 1267,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.015967666666666668,
+          "std": 0.0003476209621604152,
+          "min": 0.01565,
+          "max": 0.016339,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 14.029333333333334,
+          "std": 0.2761961863120738,
+          "min": 13.846,
+          "max": 14.347000000000001,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2148,
+          "std": 0.0,
+          "min": 2148,
+          "max": 2148,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 4,
+          "std": 0.0,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "bullets_retrieved": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "router_section_accuracy": {
+          "mean": 0.6,
+          "std": 0.0,
+          "min": 0.6,
+          "max": 0.6,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Approvals & Routing": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Vendor & Customer History": {
+            "mean": 0.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Compliance": {
+            "mean": 0.3333333333333333,
+            "std": 0.0,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 0.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-haiku-4-5"
+      },
+      "warm_rag_hyde": {
+        "overall_recall": {
+          "mean": 0.5454545454545454,
+          "std": 0.09090909090909091,
+          "min": 0.45454545454545453,
+          "max": 0.6363636363636364,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.6666666666666666,
+          "std": 0.0,
+          "min": 0.6666666666666666,
+          "max": 0.6666666666666666,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.5555555555555556,
+          "std": 0.19245008972987523,
+          "min": 0.3333333333333333,
+          "max": 0.6666666666666666,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.16666666666666666,
+          "std": 0.28867513459481287,
+          "min": 0.0,
+          "max": 0.5,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 6,
+          "std": 1.0,
+          "min": 5,
+          "max": 7,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 5,
+          "std": 1.0,
+          "min": 4,
+          "max": 6,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 11,
+          "std": 0.0,
+          "min": 11,
+          "max": 11,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2664.6666666666665,
+          "std": 96.03298044595583,
+          "min": 2575,
+          "max": 2766,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1797,
+          "std": 133.82077566656082,
+          "min": 1643,
+          "max": 1885,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.03076433333333333,
+          "std": 0.0016894227811099691,
+          "min": 0.028990999999999996,
+          "max": 0.032355,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 37.34937549527486,
+          "std": 4.209313619983501,
+          "min": 34.11687687301636,
+          "max": 42.10911580276489,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2218.6666666666665,
+          "std": 67.3003219407852,
+          "min": 2148,
+          "max": 2282,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 4,
+          "std": 0.0,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "bullets_retrieved": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "router_section_accuracy": {
+          "mean": 0.6,
+          "std": 0.0,
+          "min": 0.6,
+          "max": 0.6,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Compliance": {
+            "mean": 0.3333333333333333,
+            "std": 0.0,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 0.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Approvals & Routing": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Vendor & Customer History": {
+            "mean": 0.3333333333333333,
+            "std": 0.3333333333333333,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      }
+    },
+    "intl_contractor_batch": {
+      "cold": {
+        "overall_recall": {
+          "mean": 0.5333333333333333,
+          "std": 0.11547005383792512,
+          "min": 0.4,
+          "max": 0.6,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.2777777777777778,
+          "std": 0.09622504486493762,
+          "min": 0.16666666666666666,
+          "max": 0.3333333333333333,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.8333333333333334,
+          "std": 0.28867513459481287,
+          "min": 0.5,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 5.333333333333333,
+          "std": 1.1547005383792515,
+          "min": 4,
+          "max": 6,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 4.666666666666667,
+          "std": 1.1547005383792515,
+          "min": 4,
+          "max": 6,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2086,
+          "std": 70.92954250522133,
+          "min": 2005,
+          "max": 2137,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1555.3333333333333,
+          "std": 92.42474416157901,
+          "min": 1455,
+          "max": 1637,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.029588,
+          "std": 0.0015955074427905355,
+          "min": 0.027840000000000004,
+          "max": 0.030966,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 35.943333333333335,
+          "std": 6.63160382813489,
+          "min": 30.786,
+          "max": 43.424,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 0,
+          "std": 0.0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 0,
+          "std": 0.0,
+          "min": 0,
+          "max": 0,
+          "n": 3
+        },
+        "bullets_retrieved": null,
+        "router_section_accuracy": null,
+        "recall_by_category": {
+          "Approvals & Routing": {
+            "mean": 0.7777777777777778,
+            "std": 0.1924500897298753,
+            "n": 3
+          },
+          "Compliance": {
+            "mean": 0.75,
+            "std": 0.25,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 0.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 0.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Equity & Cap Table": {
+            "mean": 0.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      },
+      "warm_full": {
+        "overall_recall": {
+          "mean": 0.8,
+          "std": 0.0,
+          "min": 0.8,
+          "max": 0.8,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.5,
+          "std": 0.0,
+          "min": 0.5,
+          "max": 0.5,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.5,
+          "std": 0.0,
+          "min": 0.5,
+          "max": 0.5,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 8,
+          "std": 0.0,
+          "min": 8,
+          "max": 8,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 2,
+          "std": 0.0,
+          "min": 2,
+          "max": 2,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 3149.3333333333335,
+          "std": 174.09575909060317,
+          "min": 2972,
+          "max": 3320,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1615.6666666666667,
+          "std": 173.27819635872638,
+          "min": 1437,
+          "max": 1783,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.033683,
+          "std": 0.003121340096817393,
+          "min": 0.030470999999999998,
+          "max": 0.036705,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 32.33733333333333,
+          "std": 2.8138625292173276,
+          "min": 29.991,
+          "max": 35.457,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 4219,
+          "std": 0.0,
+          "min": 4219,
+          "max": 4219,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 6,
+          "std": 0.0,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "bullets_retrieved": null,
+        "router_section_accuracy": null,
+        "recall_by_category": {
+          "Approvals & Routing": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Compliance": {
+            "mean": 0.5,
+            "std": 0.0,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Equity & Cap Table": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      },
+      "warm_routed": {
+        "overall_recall": {
+          "mean": 0.8,
+          "std": 0.10000000000000003,
+          "min": 0.7,
+          "max": 0.9,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 0.8333333333333334,
+          "std": 0.0,
+          "min": 0.8333333333333334,
+          "max": 0.8333333333333334,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.6666666666666666,
+          "std": 0.28867513459481287,
+          "min": 0.5,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.8333333333333334,
+          "std": 0.28867513459481287,
+          "min": 0.5,
+          "max": 1.0,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 8,
+          "std": 1.0,
+          "min": 7,
+          "max": 9,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 2,
+          "std": 1.0,
+          "min": 1,
+          "max": 3,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 3099.6666666666665,
+          "std": 42.099089459670424,
+          "min": 3056,
+          "max": 3140,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1679,
+          "std": 70.66116330771806,
+          "min": 1598,
+          "max": 1728,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.033754,
+          "std": 0.0011799474564572784,
+          "min": 0.032408,
+          "max": 0.03461,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 35.88,
+          "std": 2.028343905751687,
+          "min": 33.993,
+          "max": 38.025000000000006,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 3174,
+          "std": 0.0,
+          "min": 3174,
+          "max": 3174,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 4,
+          "std": 0.0,
+          "min": 4,
+          "max": 4,
+          "n": 3
+        },
+        "bullets_retrieved": null,
+        "router_section_accuracy": {
+          "mean": 0.6,
+          "std": 0.0,
+          "min": 0.6,
+          "max": 0.6,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Approvals & Routing": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Compliance": {
+            "mean": 0.75,
+            "std": 0.25,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 0.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Equity & Cap Table": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      },
+      "warm_rag": {
+        "overall_recall": {
+          "mean": 0.8666666666666667,
+          "std": 0.05773502691896256,
+          "min": 0.8,
+          "max": 0.9,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.5,
+          "std": 0.0,
+          "min": 0.5,
+          "max": 0.5,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.8333333333333334,
+          "std": 0.28867513459481287,
+          "min": 0.5,
+          "max": 1.0,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 8.666666666666666,
+          "std": 0.5773502691896257,
+          "min": 8,
+          "max": 9,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 1.3333333333333333,
+          "std": 0.5773502691896257,
+          "min": 1,
+          "max": 2,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2665,
+          "std": 62.601916903558156,
+          "min": 2598,
+          "max": 2722,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1524.3333333333333,
+          "std": 54.62905209989766,
+          "min": 1472,
+          "max": 1581,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.030861,
+          "std": 0.0010039576684302972,
+          "min": 0.029875000000000002,
+          "max": 0.031882,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 33.871,
+          "std": 2.2110802789586828,
+          "min": 31.331,
+          "max": 35.365,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2439,
+          "std": 0.0,
+          "min": 2439,
+          "max": 2439,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 6,
+          "std": 0.0,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "bullets_retrieved": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "router_section_accuracy": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Compliance": {
+            "mean": 0.6666666666666666,
+            "std": 0.14433756729740643,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Approvals & Routing": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Equity & Cap Table": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      },
+      "warm_rag_cascade": {
+        "overall_recall": {
+          "mean": 0.8,
+          "std": 0.0,
+          "min": 0.8,
+          "max": 0.8,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.5,
+          "std": 0.0,
+          "min": 0.5,
+          "max": 0.5,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.5,
+          "std": 0.0,
+          "min": 0.5,
+          "max": 0.5,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 8,
+          "std": 0.0,
+          "min": 8,
+          "max": 8,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 2,
+          "std": 0.0,
+          "min": 2,
+          "max": 2,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2374.6666666666665,
+          "std": 60.052754585725154,
+          "min": 2324,
+          "max": 2441,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1365.3333333333333,
+          "std": 56.85361319505853,
+          "min": 1315,
+          "max": 1427,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.016921666666666665,
+          "std": 0.0004642632155720871,
+          "min": 0.016517999999999998,
+          "max": 0.017429,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 18.378999999999998,
+          "std": 3.4705168203021275,
+          "min": 14.637,
+          "max": 21.491999999999997,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2439,
+          "std": 0.0,
+          "min": 2439,
+          "max": 2439,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 6,
+          "std": 0.0,
+          "min": 6,
+          "max": 6,
+          "n": 3
+        },
+        "bullets_retrieved": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "router_section_accuracy": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Approvals & Routing": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Compliance": {
+            "mean": 0.5,
+            "std": 0.0,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Equity & Cap Table": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-haiku-4-5"
+      },
+      "warm_rag_hyde": {
+        "overall_recall": {
+          "mean": 0.8,
+          "std": 0.0,
+          "min": 0.8,
+          "max": 0.8,
+          "n": 3
+        },
+        "recall_actions": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_questions": {
+          "mean": 0.5,
+          "std": 0.0,
+          "min": 0.5,
+          "max": 0.5,
+          "n": 3
+        },
+        "recall_risks": {
+          "mean": 0.5,
+          "std": 0.0,
+          "min": 0.5,
+          "max": 0.5,
+          "n": 3
+        },
+        "n_covered": {
+          "mean": 8,
+          "std": 0.0,
+          "min": 8,
+          "max": 8,
+          "n": 3
+        },
+        "n_missing": {
+          "mean": 2,
+          "std": 0.0,
+          "min": 2,
+          "max": 2,
+          "n": 3
+        },
+        "n_total_items": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "tokens_in": {
+          "mean": 2780.3333333333335,
+          "std": 142.13139460841623,
+          "min": 2671,
+          "max": 2941,
+          "n": 3
+        },
+        "tokens_out": {
+          "mean": 1908.3333333333333,
+          "std": 110.18318080965594,
+          "min": 1824,
+          "max": 2033,
+          "n": 3
+        },
+        "cost_usd": {
+          "mean": 0.032446333333333334,
+          "std": 0.002006815470673209,
+          "min": 0.031002999999999996,
+          "max": 0.034738,
+          "n": 3
+        },
+        "latency_s": {
+          "mean": 36.634147667566936,
+          "std": 2.451600987770688,
+          "min": 34.51473897743225,
+          "max": 39.3190989189148,
+          "n": 3
+        },
+        "playbook_chars_in_context": {
+          "mean": 2317.6666666666665,
+          "std": 129.0981538726768,
+          "min": 2182,
+          "max": 2439,
+          "n": 3
+        },
+        "sections_in_context": {
+          "mean": 5.333333333333333,
+          "std": 0.5773502691896257,
+          "min": 5,
+          "max": 6,
+          "n": 3
+        },
+        "bullets_retrieved": {
+          "mean": 10,
+          "std": 0.0,
+          "min": 10,
+          "max": 10,
+          "n": 3
+        },
+        "router_section_accuracy": {
+          "mean": 0.8666666666666667,
+          "std": 0.11547005383792512,
+          "min": 0.8,
+          "max": 1.0,
+          "n": 3
+        },
+        "recall_by_category": {
+          "Compliance": {
+            "mean": 0.5,
+            "std": 0.0,
+            "n": 3
+          },
+          "Banking & Payments": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Approvals & Routing": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Equity & Cap Table": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          },
+          "Contract Templates": {
+            "mean": 1.0,
+            "std": 0.0,
+            "n": 3
+          }
+        },
+        "planner_model": "claude-sonnet-4-6"
+      }
+    }
+  },
+  "totals": {
+    "total_runs": 63,
+    "wall_clock_s": 2006.5,
+    "total_cost_usd": 1.8740999999999999
+  }
+}

@@ -1,0 +1,94 @@
+====================================================================================================
+EVAL HARNESS SUMMARY  —  iter: v3_cascade  —  3 seeds per (config, test)
+====================================================================================================
+
+──── TEST: intl_advisor
+     International advisor recurring setup (cross-task: T1 + T3 + T4)
+
+  Config             Planner                        Recall        Actions      Questions          Risks
+  ------------------ ---------------------- -------------- -------------- -------------- --------------
+  cold               claude-sonnet-4-6       61.5 ±  0.0%  52.4 ±  8.2%  66.7 ±  0.0%  77.8 ± 19.2%
+  warm_full          claude-sonnet-4-6       89.7 ±  8.9% 100.0 ±  0.0%  77.8 ± 19.2%  77.8 ± 19.2%
+  warm_routed        claude-sonnet-4-6       74.4 ± 16.0%  66.7 ± 16.5%  88.9 ± 19.2%  77.8 ± 19.2%
+  warm_rag           claude-sonnet-4-6       89.7 ± 11.8%  90.5 ± 16.5%  88.9 ± 19.2%  88.9 ± 19.2%
+  warm_rag_cascade   claude-haiku-4-5        72.3 ±  5.4%  81.0 ±  8.2%  77.8 ± 19.2%  47.2 ± 24.1%
+
+  Per-category recall (mean across seeds):
+    Category                                       cold       warm_full     warm_routed        warm_rag warm_rag_cascade
+    Approvals & Routing                           50.0%          100.0%          100.0%           83.3%          100.0%
+    Compliance                                    91.7%           66.7%           75.0%           75.0%           58.3%
+    Contract Templates                            50.0%          100.0%           66.7%          100.0%          100.0%
+    Banking & Payments                            66.7%          100.0%          100.0%          100.0%           33.3%
+    Equity & Cap Table                            16.7%          100.0%           16.7%          100.0%          100.0%
+
+  Cost & context:
+    Config               Cost/run    Latency  Ctx chars   Sections   Bullets
+    cold                  $0.0283     33.00s          0        0.0       n/a
+    warm_full             $0.0378     39.52s       4219        6.0       n/a
+    warm_routed           $0.0349     35.87s       2823        4.0       n/a
+    warm_rag              $0.0328     35.28s       2397        6.0        10
+    warm_rag_cascade      $0.0186     18.59s       2397        6.0        10
+
+──── TEST: customer_expansion
+     Beacon SAML SSO + ARR upgrade (cross-task: T2 + T5)
+
+  Config             Planner                        Recall        Actions      Questions          Risks
+  ------------------ ---------------------- -------------- -------------- -------------- --------------
+  cold               claude-sonnet-4-6       39.4 ± 13.9%  44.4 ±  9.6%  44.4 ± 19.2%  16.7 ± 28.9%
+  warm_full          claude-sonnet-4-6       78.8 ±  5.2%  83.3 ±  0.0%  66.7 ±  0.0%  83.3 ± 28.9%
+  warm_routed        claude-sonnet-4-6       51.5 ± 10.5%  61.1 ±  9.6%  55.6 ± 19.2%  16.7 ± 28.9%
+  warm_rag           claude-sonnet-4-6       54.5 ±  0.0%  66.7 ±  0.0%  55.6 ± 19.2%  16.7 ± 28.9%
+  warm_rag_cascade   claude-haiku-4-5        45.5 ±  0.0%  66.7 ±  0.0%  33.3 ±  0.0%   0.0 ±  0.0%
+
+  Per-category recall (mean across seeds):
+    Category                                       cold       warm_full     warm_routed        warm_rag warm_rag_cascade
+    Approvals & Routing                           83.3%          100.0%           83.3%          100.0%          100.0%
+    Vendor & Customer History                     22.2%           77.8%           33.3%           11.1%            0.0%
+    Compliance                                    33.3%           66.7%           33.3%           55.6%           33.3%
+    Contract Templates                            50.0%          100.0%          100.0%          100.0%          100.0%
+    Banking & Payments                             0.0%           33.3%            0.0%            0.0%            0.0%
+
+  Cost & context:
+    Config               Cost/run    Latency  Ctx chars   Sections   Bullets
+    cold                  $0.0259     27.88s          0        0.0       n/a
+    warm_full             $0.0329     32.84s       4219        6.0       n/a
+    warm_routed           $0.0306     34.34s       2532        3.0       n/a
+    warm_rag              $0.0284     29.72s       2148        4.0        10
+    warm_rag_cascade      $0.0160     14.03s       2148        4.0        10
+
+──── TEST: intl_contractor_batch
+     Two more Indian engineers, 6 months each (cross-task: T1 + T3)
+
+  Config             Planner                        Recall        Actions      Questions          Risks
+  ------------------ ---------------------- -------------- -------------- -------------- --------------
+  cold               claude-sonnet-4-6       53.3 ± 11.5%  27.8 ±  9.6%  83.3 ± 28.9% 100.0 ±  0.0%
+  warm_full          claude-sonnet-4-6       80.0 ±  0.0% 100.0 ±  0.0%  50.0 ±  0.0%  50.0 ±  0.0%
+  warm_routed        claude-sonnet-4-6       80.0 ± 10.0%  83.3 ±  0.0%  66.7 ± 28.9%  83.3 ± 28.9%
+  warm_rag           claude-sonnet-4-6       83.3 ±  5.8% 100.0 ±  0.0%  66.7 ± 28.9%  50.0 ±  0.0%
+  warm_rag_cascade   claude-haiku-4-5        80.0 ±  0.0% 100.0 ±  0.0%  50.0 ±  0.0%  50.0 ±  0.0%
+
+  Per-category recall (mean across seeds):
+    Category                                       cold       warm_full     warm_routed        warm_rag warm_rag_cascade
+    Approvals & Routing                           77.8%          100.0%          100.0%          100.0%          100.0%
+    Compliance                                    75.0%           50.0%           75.0%           58.3%           50.0%
+    Contract Templates                             0.0%          100.0%          100.0%          100.0%          100.0%
+    Banking & Payments                             0.0%          100.0%            0.0%          100.0%          100.0%
+    Equity & Cap Table                             0.0%          100.0%          100.0%          100.0%          100.0%
+
+  Cost & context:
+    Config               Cost/run    Latency  Ctx chars   Sections   Bullets
+    cold                  $0.0296     35.94s          0        0.0       n/a
+    warm_full             $0.0337     32.34s       4219        6.0       n/a
+    warm_routed           $0.0338     35.88s       3174        4.0       n/a
+    warm_rag              $0.0336     33.64s       2439        6.0        10
+    warm_rag_cascade      $0.0169     18.38s       2439        6.0        10
+
+====================================================================================================
+HEADLINE: overall recall by config (mean ± std)  —  iter: v3_cascade
+====================================================================================================
+  Test                                     cold          warm_full        warm_routed           warm_rag   warm_rag_cascade
+  intl_advisor                 61.5 ±  0.0%   89.7 ±  8.9%   74.4 ± 16.0%   89.7 ± 11.8%   72.3 ±  5.4%
+  customer_expansion           39.4 ± 13.9%   78.8 ±  5.2%   51.5 ± 10.5%   54.5 ±  0.0%   45.5 ±  0.0%
+  intl_contractor_batch        53.3 ± 11.5%   80.0 ±  0.0%   80.0 ± 10.0%   83.3 ±  5.8%   80.0 ±  0.0%
+
+Wall-clock: 1384.7s    Total cost: $1.3014    Runs: 45
